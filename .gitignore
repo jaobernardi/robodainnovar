@@ -1,6 +1,7 @@
 #bin stuff
-!bin/js/*.js
 bin/*
+!bin/js/
+
 
 
 # Byte-compiled / optimized / DLL files
