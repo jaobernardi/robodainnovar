@@ -1,4 +1,8 @@
 {
     "chrome_path": "bin/chromedriver_macos",
+    "database": {
+        "type": "sqlite3",
+        "address": "database/users.sql"
+    },
     "menu_path": "menus/"
 }
