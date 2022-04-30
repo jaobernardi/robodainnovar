@@ -1,16 +1,32 @@
+from lib.patching import patch
+# Path urlib stuff
+patch()
+
 from lib.whatsapp import Whatsapp, SessionStatus
+from lib.database import setup_tables
 from lib.utils import load_handlers
 import logging
 from pyding import on
 from qrcode import QRCode
+import argparse
 
+parser = argparse.ArgumentParser(description='Whatsapp Automation Service.')
+
+parser.add_argument('-f', '--headfull', action='store_true', help="Starts chrome on headfull mode")
+parser.add_argument('-sd', '--setup-database', action='store_true', help="Setups database")
+
+args = parser.parse_args()
 logging.basicConfig(level=logging.INFO)
 
-whats = Whatsapp(headless=True)
+
+if args.setup_database:
+    setup_tables()
+
+whats = Whatsapp(headless=not args.headfull)
 
 @on("whatsapp_new_qr")
 def new_qr(event, whatsapp: Whatsapp, qrcode):
-    if whatsapp.headless:
+    if not whatsapp.headless:
         logging.info("Please, log in using the following qr-code:")
         qr = QRCode()
         qr.add_data(qrcode)
@@ -30,7 +46,8 @@ def session_update(event, whatsapp, old_status, new_status):
     logging.info(f"Session status changed to: {conversion_table[new_status]}")
 
 
-load_handlers()
+if __name__ == "__main__":
+    load_handlers()
 
-whats.start()
+    whats.start()
 
