@@ -1,5 +1,4 @@
 from base64 import b64encode
-from curses.ascii import US
 import mimetypes
 import os
 from .user import User
