@@ -9,6 +9,7 @@ function handle_message(message) {
                 "id": message.from._serialized
             },
             "message": {
+                "type": message.type,
                 "chatID": message.chat.id._serialized,
                 "id": message.id._serialized,
                 "text": message.text,
