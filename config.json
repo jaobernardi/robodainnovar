@@ -1,5 +1,6 @@
 {
     "chrome_path": "bin/chromedriver_macos",
+    "session_path": "bin/session/",
     "database": {
         "type": "sqlite3",
         "address": "database/users.sql"
