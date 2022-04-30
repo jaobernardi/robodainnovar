@@ -34,6 +34,11 @@ class Menu():
         return self(**dict)
 
     @property
+    def messages(self):
+        return self.data['messages']
+
+
+    @property
     def fallbacks(self):
         return self.data['fallbacks']
 
@@ -90,8 +95,8 @@ class Menu():
         action = self.option_action(option)
         return self.parse_action(action, context=self.options[option])
 
-    def options_string(self):
-        lines = []
+    def menu_string(self):
+        lines = [self.data['prompt']]
         for (index, option) in self.options.items():
             if "name" in option:
                 index = option['name']
