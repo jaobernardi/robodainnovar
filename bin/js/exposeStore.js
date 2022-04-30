@@ -1,7 +1,4 @@
-let exposeStore = (moduleRaidStr) => {
-    eval('var moduleRaid = ' + moduleRaidStr);
-    // eslint-disable-next-line no-undef
-    window.mR = moduleRaid();
+let exposeStore = () => {
     window.Store = Object.assign({}, window.mR.findModule(m => m.default && m.default.Chat)[0].default);
     window.Store.AppState = window.mR.findModule('Socket')[0].Socket;
     window.Store.Conn = window.mR.findModule('Conn')[0].Conn;
@@ -66,4 +63,4 @@ let exposeStore = (moduleRaidStr) => {
     }
 };
 
-exposeStore(arguments[0])
+exposeStore()
