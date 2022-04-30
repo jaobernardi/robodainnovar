@@ -60,7 +60,7 @@ def update_user_permissions(phonenumber, permissions):
 def update_user(phonenumber, name, permissions, menu):
     with Database() as db:
         db.execute("UPDATE Users SET Name = ?, Permissions = ? WHERE PhoneNumber = ?", (name, permissions, phonenumber))
-        db.execute("UPDATE MenuState SET Meny = ? WHERE User = ?", (menu, phonenumber))
+        db.execute("INSERT OR REPLACE INTO MenuState(Menu, User) VALUES (?, ?)", (menu, phonenumber))
 
 
 def update_user_name(phonenumber, name):
