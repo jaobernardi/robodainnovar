@@ -1,10 +1,12 @@
 from pyding import on
 import logging
+from lib.structures import InternalActions
+from lib import database
 
 
 @on("whatsapp_new_message")
 def new_message(event, whatsapp, message):
-    logging.info(f"[{message.userID}] {message.text}")
+    logging.info(f"[{message.user.phonenumber}] {message.text}")
     match message.text.split(" "):
         case ["!ping"]:
             message.reply("Pong!")
@@ -14,3 +16,4 @@ def new_message(event, whatsapp, message):
             message.reply("", file="assets/teste.mp4")
         case _:
             message.seen()
+    
