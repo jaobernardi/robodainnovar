@@ -1,4 +1,5 @@
 {
+    "bin": "bin/",
     "emotes_path": "bin/emotes.json",
     "chrome_path": "bin/chromedriver_macos",
     "session_path": "bin/session/",
