@@ -1,0 +1,18 @@
+{
+    "options": {
+        "*": {
+            "1": {
+                "prompt": "Passo Fundo",
+                "name": "1️⃣"
+            },
+            "2": {
+                "prompt": "Porto Alegre",
+                "name": "2️⃣"
+            }
+        }
+    },
+    "prompt": "Qual a sua cidade?",
+    "fallbacks": {
+        "action": "menu#departmentSelect@{prompt}"
+    }
+}

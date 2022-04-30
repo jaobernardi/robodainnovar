@@ -1,0 +1,10 @@
+{
+    "options": {
+        "*": {
+            "1": {
+                "prompt": "Financeiro",
+                "action": "event#innovar_consultation_required@{carryoption}|$|exit#$@$"
+            }
+        }
+    }
+}
