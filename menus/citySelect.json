@@ -2,17 +2,54 @@
     "options": {
         "*": {
             "1": {
-                "prompt": "Passo Fundo",
+                "prompt": "📌 Passo Fundo",
                 "name": "1️⃣"
             },
             "2": {
-                "prompt": "Porto Alegre",
+                "prompt": "📌 Marau",
                 "name": "2️⃣"
+            },
+            "3": {
+                "prompt": "📌 Santo Ângelo",
+                "name": "3️⃣"
+            },
+            "4": {
+                "prompt": "📌 Sarandi",
+                "name": "4️⃣"
+            },
+            "5": {
+                "prompt": "📌 Palmeiras",
+                "name": "5️⃣"
+            },
+            "6": {
+                "prompt": "📌 Carazinho",
+                "name": "6️⃣"
+            },
+            "7": {
+                "prompt": "📌 Guaporé",
+                "name": "7️⃣"
+            },
+            "8": {
+                "prompt": "📌 Lagoa Vermelha",
+                "name": "8️⃣"
+            },
+            "9": {
+                "prompt": "📌 Rio Grande",
+                "name": "9️⃣"
+            },
+            "10": {
+                "prompt": "🌎 Outra cidade",
+                "name": "🔟"
             }
+            
         }
     },
-    "prompt": "Qual a sua cidade?",
+    "prompt": "📌 Para começarmos, por favor, envie o número correspondente ao da sua região:\n",
     "fallbacks": {
         "action": "menu#departmentSelect@{prompt}"
+    },
+    "messages": {
+        "welcome": "Olá 👋\nEste é o atendimento automatizado da *Innovar.*",
+        "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente à sua cidade."
     }
 }
