@@ -5,7 +5,8 @@ function handle_message(message) {
     if (!message.id.fromMe){
         done({
             "user": {
-                "userID": message.from.user
+                "phonenumber": message.from.user,
+                "id": message.from._serialized
             },
             "message": {
                 "chatID": message.chat.id._serialized,
