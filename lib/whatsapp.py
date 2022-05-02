@@ -186,12 +186,10 @@ class Whatsapp():
         return
 
     def loop(self):
-        self.running = True
-        # Spin up auxiliary loops
-        Thread(target=self.message_loop, daemon=True).start()
+ 
         latest_qr = None
         latest_status = self.current_status
-        while self.running:
+        while True:
             # Split commands per session status
             match self.current_status:
                 # Landing page
@@ -200,13 +198,12 @@ class Whatsapp():
                     if qr_code and qr_code != latest_qr:
                         pyding.call("whatsapp_new_qr", whatsapp=self, qrcode=qr_code)
                         latest_qr = qr_code
-           
+
             # Status watcher
             if self.current_status != latest_status:
                 pyding.call("whatsapp_session_update", whatsapp=self, old_status=latest_status, new_status=self.current_status)
                 latest_status = self.current_status
-
-
+            sleep(0.25)
     # Driving the webdriver
 
     def execute_js(self, js, *arguments):
@@ -255,8 +252,11 @@ class Whatsapp():
         self.expose_store()
 
         if not skip_loop:
+            self.running = True
             if self.threaded:
-                self.thread = Thread(target=self.loop, daemon=True)
-                self.thread.start()
+                self.main_thread = Thread(target=self.loop, daemon=True)
+                self.main_thread.start()
                 return
+            self.message_thread = Thread(target=self.message_loop, daemon=True)
+            self.message_thread.start()
             self.loop()
