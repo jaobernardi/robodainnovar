@@ -6,7 +6,7 @@ from .user import User
 class Message():
     def __init__(self, whatsapp, api_return):
         self.__dict__.update(api_return['message'])
-        self.user = User(**api_return['user'])
+        self.user = User(**api_return['user'], whatsapp=whatsapp)
         self.whatsapp = whatsapp
     
     def seen(self):
