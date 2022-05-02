@@ -99,6 +99,8 @@ class Menu():
             # TODO: Custom exceptions
             raise Exception()
         
+        option = self.get_option(option)
+
         action = self.option_action(option)
         return self.parse_action(action, context=self.options[option] | {"input": option} | self.context, event_context=context | self.context)
 
