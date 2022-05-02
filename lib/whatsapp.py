@@ -24,7 +24,7 @@ class SessionStatus(Enum):
 
 
 class Whatsapp():
-    def __init__(self, threaded=False, headless=False):
+    def __init__(self, threaded=False, headless=True):
         # Setup drivers
         options = Options()
         options.add_argument(f"--user-data-dir={path.abspath(config.get_session_path())}")
@@ -175,7 +175,7 @@ class Whatsapp():
 
     def message_loop(self):
         last_msg = None
-        while self.running:
+        while True:
             # Wait for message
             message = self.load_js_from_file("bin/js/waitMessage.js", asyncronos=True)
             msg = Message(self, message)
