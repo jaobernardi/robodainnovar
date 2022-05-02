@@ -6,7 +6,8 @@ function handle_message(message) {
         done({
             "user": {
                 "phonenumber": message.from.user,
-                "id": message.from._serialized
+                "id": message.from._serialized,
+                "name": message.chat.contact.pushname
             },
             "message": {
                 "type": message.type,
