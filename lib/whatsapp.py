@@ -175,16 +175,16 @@ class Whatsapp():
 
     def message_loop(self):
         last_msg = None
-        while True:
-            # Wait for message
-            message = self.load_js_from_file("bin/js/waitMessage.js", asyncronos=True)
-            msg = Message(self, message)
-            # Prevent duplicate readings
-            if msg.id == last_msg:
-                continue
-            last_msg = msg.id
-            pyding.call("whatsapp_new_message", whatsapp=self, message=msg)
-        return
+        print("loop")
+        # Wait for message
+        message = self.load_js_from_file("bin/js/waitMessage.js", asyncronos=True)
+        msg = Message(self, message)
+        # Prevent duplicate readings
+        if msg.id == last_msg:
+            return
+        last_msg = msg.id
+        pyding.call("whatsapp_new_message", whatsapp=self, message=msg)
+        
 
     def loop(self):
  
@@ -199,12 +199,9 @@ class Whatsapp():
                     if qr_code and qr_code != latest_qr:
                         pyding.call("whatsapp_new_qr", whatsapp=self, qrcode=qr_code)
                         latest_qr = qr_code
+                case SessionStatus.LOGGED_IN:
+                    self.message_loop()
 
-            # Status watcher
-            if self.current_status != latest_status:
-                pyding.call("whatsapp_session_update", whatsapp=self, old_status=latest_status, new_status=self.current_status)
-                latest_status = self.current_status
-            sleep(0.25)
     # Driving the webdriver
 
     def execute_js(self, js, *arguments):
@@ -258,6 +255,4 @@ class Whatsapp():
                 self.main_thread = Thread(target=self.loop, daemon=True)
                 self.main_thread.start()
                 return
-            self.message_thread = Thread(target=self.message_loop, daemon=True)
-            self.message_thread.start()
             self.loop()
