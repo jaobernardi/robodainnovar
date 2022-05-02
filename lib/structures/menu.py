@@ -81,7 +81,11 @@ class Menu():
                     event = pyding.call(event_name, carryoption=carryoption, **event_context)
     
     def has_option(self, option):
-        return option in self.options
+        if option in self.options:
+            return True
+        elif "*" in self.options:
+            return True
+        return False
 
     def option_action(self, option):
         if 'action' in self.options[option]:
