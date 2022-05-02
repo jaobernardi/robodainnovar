@@ -29,13 +29,10 @@ whats = Whatsapp(headless=not args.headfull, threaded=args.threaded)
 
 @on("whatsapp_new_qr")
 def new_qr(event, whatsapp: Whatsapp, qrcode):
-    if not whatsapp.headless:
-        logging.info("Please, log in using the following qr-code:")
-        qr = QRCode()
-        qr.add_data(qrcode)
-        qr.print_ascii(invert=True)
-    else:
-        logging.info("Recieved the following log-in code: "+qrcode)
+    logging.info("Please, log in using the following qr-code:")
+    qr = QRCode()
+    qr.add_data(qrcode)
+    qr.print_ascii(invert=True)
 
 
 @on('whatsapp_session_update')
