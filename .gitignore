@@ -1,6 +1,7 @@
 #bin stuff
 bin/*
 !bin/js/
+!bin/emotes.json
 
 
 
