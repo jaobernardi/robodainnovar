@@ -7,5 +7,17 @@
         "type": "sqlite3",
         "address": "database/users.sql"
     },
-    "menu_path": "menus/"
+    "menu_path": "menus/",
+    "contact": {
+        "financeiro": {
+            "Ariane": {"number": 555496389480, "cities": ["Palmeiras Das Missões", "Sarandi"]},
+            "Andressa": {"number": 555597277238, "cities": ["Santo Ângelo"]},
+            "Bruna": {"number": 555496741395, "cities": ["Passo Fundo", "Guaporé", "Lagoa Vermelha", "Carazinho"]},
+            "Valquiria": {"number": 555496348263, "cities": ["Rio Grande", "Marau"]},
+            "Adriana": {"number": 555499763132, "cities": ["Outra cidade"]}
+        },
+        "comercial": {"number": 555492022338, "number1": 555499353920},
+        "engenharia": {"number": 555492022338, "number1": 555499050780},
+        "atendimento geral": {"number": 555492022338, "number1": 555499833798}
+    }
 }
