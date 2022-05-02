@@ -31,7 +31,7 @@ class Whatsapp():
         options.add_argument(f"--no-sandbox")
         if headless:
             options.add_argument("--headless")
-            options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36")
+            options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36")
 
         # Open chrome
         self.webdriver = webdriver.Chrome(
