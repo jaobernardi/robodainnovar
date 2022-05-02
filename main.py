@@ -14,6 +14,9 @@ parser = argparse.ArgumentParser(description='Whatsapp Automation Service.')
 
 parser.add_argument('-f', '--headfull', action='store_true', help="Starts chrome on headfull mode")
 parser.add_argument('-sd', '--setup-database', action='store_true', help="Setups database")
+parser.add_argument('-sf', '--skip-safeguards', action='store_true', help="Skips the whatsapp waiting safeguard")
+parser.add_argument('-sl', '--skip-loop', action='store_true', help="Skips the whatsapp waiting safeguard")
+parser.add_argument('-t', '--threaded', action='store_true', help="Whatsapp main loop thread status")
 
 args = parser.parse_args()
 logging.basicConfig(level=logging.INFO)
@@ -22,7 +25,7 @@ logging.basicConfig(level=logging.INFO)
 if args.setup_database:
     setup_tables()
 
-whats = Whatsapp(headless=not args.headfull)
+whats = Whatsapp(headless=not args.headfull, threaded=args.threaded)
 
 @on("whatsapp_new_qr")
 def new_qr(event, whatsapp: Whatsapp, qrcode):
@@ -49,5 +52,5 @@ def session_update(event, whatsapp, old_status, new_status):
 if __name__ == "__main__":
     load_handlers()
 
-    whats.start()
+    whats.start(args.skip_safeguards, args.skip_loop)
 
