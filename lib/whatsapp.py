@@ -173,10 +173,15 @@ class Whatsapp():
     # Logic
 
     def message_loop(self):
+        last_msg = None
         while self.running:
             # Wait for message
             message = self.load_js_from_file("bin/js/waitMessage.js", asyncronos=True)
             msg = Message(self, message)
+            # Prevent duplicate readings
+            if msg.id == last_msg:
+                continue
+            last_msg = msg.id
             pyding.call("whatsapp_new_message", whatsapp=self, message=msg)
         return
 

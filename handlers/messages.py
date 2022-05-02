@@ -21,14 +21,16 @@ def new_message(event, whatsapp, message: Message):
             message.reply(message.user.menu.menu_string())
 
         case msg:
-            if not message.user.menu or not msg:
+            if not message.user.menu:
                 message.user.menu = Menu("citySelect")
                 message.user.update_database()
                 if "welcome" in message.user.menu.messages:
                     message.reply(message.user.menu.messages['welcome'])
                 message.reply(message.user.menu.menu_string(), qoute=False)
                 return
-
+            if not msg:
+                return
+            
             msg = " ".join(msg)
             if not message.user.menu.has_option(msg):
                 if "wrong" not in message.user.menu.messages:
