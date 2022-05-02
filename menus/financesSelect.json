@@ -1,0 +1,39 @@
+{
+    "options": {
+        "*": {
+            "1": {
+                "prompt": "Boletos",
+                "index_name": "1️⃣",
+                "action": "event#menu_atending_call@{carryoption}::{prompt}|$|exit#.@."
+            },
+            "2": {
+                "prompt": "Renegociações",
+                "index_name": "2️⃣",
+                "action": "event#menu_atending_call@{carryoption}::{prompt}|$|exit#.@."
+            },
+            "3": {
+                "prompt": "Antecipações ou Quitações",
+                "index_name": "3️⃣",
+                "action": "event#menu_atending_call@{carryoption}::{prompt}|$|exit#.@."
+            },
+            "4": {
+                "prompt": "Outro",
+                "index_name": "4️⃣",
+                "action": "event#menu_atending_call@{carryoption}::other|$|exit#.@."
+            },
+            "5": {
+                "prompt": "↩ Voltar à seleção de regiões",
+                "index_name": "5️⃣",
+                "action": "menu#citySelect@None"
+            }
+        }
+    },
+    "prompt": "✍️ Certo. Agora selecione o assunto do seu atendimento:",
+    "fallbacks": {
+        "action": "event#menu_atending_call@{prompt}_{carryoption}|$|exit#.@."
+    },
+    "messages": {
+        "end": "Anotado ✍️! Seu pedido foi encaminhado e, em breve, nossa equipe entrará em contato com você. 😉",
+        "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente ao assunto do seu atendimento."
+    }
+}

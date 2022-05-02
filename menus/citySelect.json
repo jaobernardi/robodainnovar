@@ -2,54 +2,64 @@
     "options": {
         "*": {
             "1": {
+                "carry_name": "Passo Fundo",
                 "prompt": "📌 Passo Fundo",
-                "name": "1️⃣"
+                "index_name": "1️⃣"
             },
             "2": {
+                "carry_name": "Marau",
                 "prompt": "📌 Marau",
-                "name": "2️⃣"
+                "index_name": "2️⃣"
             },
             "3": {
+                "carry_name": "Santo Ângelo",
                 "prompt": "📌 Santo Ângelo",
-                "name": "3️⃣"
+                "index_name": "3️⃣"
             },
             "4": {
+                "carry_name": "Sarandi",
                 "prompt": "📌 Sarandi",
-                "name": "4️⃣"
+                "index_name": "4️⃣"
             },
             "5": {
-                "prompt": "📌 Palmeiras",
-                "name": "5️⃣"
+                "carry_name": "Palmeiras Das Missões",
+                "prompt": "📌 Palmeiras Das Missões",
+                "index_name": "5️⃣"
             },
             "6": {
+                "carry_name": "Carazinho",
                 "prompt": "📌 Carazinho",
-                "name": "6️⃣"
+                "index_name": "6️⃣"
             },
             "7": {
+                "carry_name": "Guaporé",
                 "prompt": "📌 Guaporé",
-                "name": "7️⃣"
+                "index_name": "7️⃣"
             },
             "8": {
+                "carry_name": "Lagoa Vermelha",
                 "prompt": "📌 Lagoa Vermelha",
-                "name": "8️⃣"
+                "index_name": "8️⃣"
             },
             "9": {
+                "carry_name": "Rio Grande",
                 "prompt": "📌 Rio Grande",
-                "name": "9️⃣"
+                "index_name": "9️⃣"
             },
             "10": {
                 "prompt": "🌎 Outra cidade",
-                "name": "🔟"
+                "action": "menu#departmentSelect@outside",
+                "index_name": "🔟"
             }
             
         }
     },
-    "prompt": "📌 Para começarmos, por favor, envie o número correspondente ao da sua região:\n",
+    "prompt": "📌 Para começarmos, por favor, envie o número correspondente ao da região em que gostaria de receber atendimento:\n",
     "fallbacks": {
-        "action": "menu#departmentSelect@{prompt}"
+        "action": "menu#departmentSelect@{carry_name}"
     },
     "messages": {
-        "welcome": "Olá 👋\nEste é o atendimento automatizado da *Innovar.*",
+        "welcome": "Olá {user.name} 👋\nSou o assistente virtual da *Innovar*.",
         "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente à sua cidade."
     }
 }

@@ -1,32 +1,58 @@
 {
     "options": {
+        "outside": {
+            "1": {
+                "prompt": "Comercial",
+                "index_name": "1️⃣",
+                "action": "menu#commercialSelect@{carryoption}::{prompt}"
+            },
+            "2": {
+                "prompt": "Engenharia",
+                "index_name": "2️⃣",
+                "action": "menu#engeneerSelect@{carryoption}::{prompt}"
+            },
+            "3": {
+                "prompt": "Atendimento Geral",
+                "index_name": "3️⃣",
+                "action": "menu#generalSelect@{carryoption}::{prompt}"
+            },
+            "4": {
+                "prompt": "↩ Voltar à seleção de regiões",
+                "index_name": "4️⃣",
+                "action": "menu#citySelect@None"
+            }
+        },
         "*": {
             "1": {
                 "prompt": "Financeiro",
-                "action": "event#department_call@financeiro_{carryoption}|$|exit#.@.",
-                "name": "1️⃣"
+                "index_name": "1️⃣",
+                "action": "menu#financesSelect@{carryoption}::{prompt}"
             },
             "2": {
                 "prompt": "Comercial",
-                "action": "event#department_call@comercial_{carryoption}|$|exit#.@.",
-                "name": "2️⃣"
+                "index_name": "2️⃣",
+                "action": "menu#commercialSelect@{carryoption}::{prompt}"
             },
             "3": {
                 "prompt": "Engenharia",
-                "action": "event#department_call@engenharia_{carryoption}|$|exit#.@.",
-                "name": "3️⃣"
+                "index_name": "3️⃣",
+                "action": "menu#engeneerSelect@{carryoption}::{prompt}"
             },
             "4": {
                 "prompt": "Atendimento Geral",
-                "action": "event#department_call@atendimentogeral_{carryoption}|$|exit#.@.",
-                "name": "4️⃣"
+                "index_name": "4️⃣",
+                "action": "menu#generalSelect@{carryoption}::{prompt}"
+            },
+            "5": {
+                "prompt": "↩ Voltar à seleção de regiões",
+                "index_name": "5️⃣",
+                "action": "menu#citySelect@None"
             }
-
         }
     },
-    "prompt": "🗣 — Selecione um assunto para seu atendimento:",
+    "prompt": "✍️ Certo. Agora selecione o departamento com qual você quer falar:",
     "fallbacks": {
-        "action": "menu#departmentSelect@{carryoption}"
+        "action": "event#menu_atending_call@{prompt}_{carryoption}|$|exit#.@."
     },
     "messages": {
         "end": "Anotado ✍️! Seu pedido foi encaminhado e, em breve, nossa equipe entrará em contato com você. 😉",

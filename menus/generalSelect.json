@@ -1,0 +1,35 @@
+{
+    "options": {
+        "*": {
+            "1": {
+                "prompt": "Item 1",
+                "index_name": "1️⃣"
+            },
+            "2": {
+                "prompt": "Item 2",
+                "index_name": "2️⃣"
+            },
+            "3": {
+                "prompt": "Item 3",
+                "index_name": "3️⃣"
+            },
+            "4": {
+                "prompt": "IPTU",
+                "index_name": "4️⃣"
+            },
+            "5": {
+                "prompt": "↩ Voltar à seleção de regiões",
+                "index_name": "5️⃣",
+                "action": "menu#citySelect@None"
+            }
+        }
+    },
+    "prompt": "✍️ Certo. Agora selecione o assunto do seu atendimento:",
+    "fallbacks": {
+        "action": "event#menu_atending_call@{carryoption}::{prompt}|$|exit#.@."
+    },
+    "messages": {
+        "end": "✍️ Certo. Encaminhei as informações que você me passou aos setores responsáveis e, em breve, você receberá ",
+        "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente ao assunto do seu atendimento."
+    }
+}

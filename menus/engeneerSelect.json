@@ -1,0 +1,27 @@
+{
+    "options": {
+        "*": {
+            "1": {
+                "prompt": "Marcação de lote.",
+                "index_name": "1️⃣"
+            },
+            "2": {
+                "prompt": "Projetos",
+                "index_name": "2️⃣"
+            },
+            "3": {
+                "prompt": "↩ Voltar à seleção de regiões",
+                "index_name": "3️⃣",
+                "action": "menu#citySelect@None"
+            }
+        }
+    },
+    "prompt": "✍️ Certo. Agora selecione o assunto do seu atendimento:",
+    "fallbacks": {
+        "action": "event#menu_atending_call@{carryoption}::{prompt}|$|exit#.@."
+    },
+    "messages": {
+        "end": "Anotado ✍️! Seu pedido foi encaminhado e, em breve, nossa equipe entrará em contato com você. 😉",
+        "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente ao assunto do seu atendimento."
+    }
+}
