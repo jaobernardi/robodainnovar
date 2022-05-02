@@ -87,7 +87,13 @@ class Menu():
             return self.options[option]['action']
         return self.fallbacks['action']
 
-    def process_option(self, option):
+    def get_option(self, option):
+        if option in self.options:
+            return option
+        elif "*" in self.options:
+            return '*'
+
+    def process_option(self, option, **context):
         if not self.has_option(option):
             # TODO: Custom exceptions
             raise Exception()
