@@ -1,4 +1,5 @@
 from .. import database
+from . import Menu
 from base64 import b64encode
 import mimetypes
 import os
@@ -11,15 +12,29 @@ class User():
         self.name = name
         self.fetch_database()
         self.whatsapp = whatsapp
+
+    @property
+    def menu(self):
+        return self._menu
     
+    @menu.setter
+    def menu(self, new_value: Menu):
+        self._menu = new_value
+        if self._menu:
+            self._menu.context['user'] = self
+        self.update_database()
 
     def fetch_database(self):
         response = database.get_user(self.phonenumber)
         if not response:
-            database.create_user(self.phonenumber)
-            self.name, self.permissions, self.menu = None, {}, None
+            database.create_user(self.phonenumber, self.name, [])
+            self.permissions, self._menu = [], None
             return
-        
+
+        phonenumber, self.name, self.permissions, self._menu = response
+        if self._menu:
+            self._menu.context['user'] = self
+
     def send_message(self, msg, file=None, contact=None):
         if not self.whatsapp:
             # TODO: Custom exception
@@ -40,6 +55,8 @@ class User():
                 "filename": os.path.basename(file)
             }
         self.whatsapp.send_message(self.id, msg, options)
+
+
     def update_database(self):
-        database.update_user(self.phonenumber, self.name, self.permissions, self.menu)
+        database.update_user(self.phonenumber, self.name, self.permissions, self._menu)
     
