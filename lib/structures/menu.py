@@ -13,8 +13,9 @@ class InternalActions(Enum):
 
 
 class Menu():
-    def __init__(self, name, carryoption=None):
+    def __init__(self, name, carryoption=None, **context):
         self.name = name
+        self.context = context
         self.carryoption = carryoption
         self.load()
     
@@ -35,7 +36,7 @@ class Menu():
 
     @property
     def messages(self):
-        return self.data['messages']
+        return {k: v.format(**self.context) for k, v in self.data['messages'].items()}
 
 
     @property
@@ -56,7 +57,7 @@ class Menu():
         self.data = load(file)
         file.close()
     
-    def parse_action(self, action, context):
+    def parse_action(self, action, context, event_context):
         for action in action.split("|$|"):
             action_context = action.split("#")[1].split("@")[0]
             arguments = "@".join(action.split("@")[1:])
@@ -77,7 +78,7 @@ class Menu():
                     return InternalActions.CARRYCHANGE
 
                 case ["event", event_name, carryoption]:
-                    event = pyding.call(event_name, carryoption=carryoption)
+                    event = pyding.call(event_name, carryoption=carryoption, **event_context)
     
     def has_option(self, option):
         return option in self.options
@@ -99,7 +100,7 @@ class Menu():
             raise Exception()
         
         action = self.option_action(option)
-        return self.parse_action(action, context=self.options[option])
+        return self.parse_action(action, context=self.options[option] | {"input": option} | self.context, event_context=context | self.context)
 
     def menu_string(self):
         lines = [self.data['prompt']]
