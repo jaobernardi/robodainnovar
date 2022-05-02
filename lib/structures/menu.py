@@ -107,7 +107,11 @@ class Menu():
     def menu_string(self):
         lines = [self.data['prompt']]
         for (index, option) in self.options.items():
+            if index == "*":
+                continue
+            if option['index_name']:
+                index = option['index_name']
             if "name" in option:
-                index = option['name']
+                index = option['screen_name']
             lines.append(f"{index} — {option['prompt']}")
         return "\n".join(lines)
