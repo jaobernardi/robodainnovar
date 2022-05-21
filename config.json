@@ -17,7 +17,11 @@
             "Adriana": {"number": 555499763132, "cities": ["Outra cidade"]}
         },
         "comercial": {"number": 555492022338, "number1": 555499353920},
-        "engenharia": {"number": 555492022338, "number1": 555499050780},
+        "engenharia": {
+            "Obras": {"number": 555492022338, "number1": 555499050780},
+            "Projetos": {"number": 555492022338, "number1": 555499221728},
+            "Outros": {"number": 555492022338, "number1": 555496006537}
+        },
         "atendimento geral": {"number": 555492022338, "number1": 555499833798}
     }
 }

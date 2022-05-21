@@ -14,7 +14,9 @@ def atending_call(event, carryoption, user: User):
 
     match selector:
         case [city, "Financeiro", operation]:
+            if city == 'outside': city = 'Outra cidade'
             for operator_name, operator_info in atendees.items():
+
                 if city in operator_info['cities']:
                     #operator = operator_info['user']
                     operator = user
@@ -28,6 +30,8 @@ def atending_call(event, carryoption, user: User):
                     ))
                     operator.send_message("", contact=user)
         case [city, "Comercial", operation]:
+            if city == 'outside': city = 'Outra cidade'
+
             #operator = User(config.get_contact()['comercial']['number'], f"{config.get_contact()['comercial']['number']}@c.us", whatsapp=whatsapp)
             operator = user
             now = datetime.now()
@@ -41,7 +45,9 @@ def atending_call(event, carryoption, user: User):
             operator.send_message("", contact=user)
         
         case [city, "Engenharia", operation]:
-            #operator = User(config.get_contact()['engenharia']['number'], f"{config.get_contact()['engenharia']['number']}@c.us", whatsapp=whatsapp)
+            if city == 'outside': city = 'Outra cidade'
+
+            #operator = User(config.get_contact()['engenharia'][operation]['number'], f"{config.get_contact()['engenharia'][operation]['number']}@c.us", whatsapp=whatsapp)
             operator = user
             now = datetime.now()
             operator.send_message((
@@ -54,6 +60,8 @@ def atending_call(event, carryoption, user: User):
             operator.send_message("", contact=user)
         
         case [city, "Atendimento Geral", operation]:
+            if city == 'outside': city = 'Outra cidade'
+
             #operator = User(config.get_contact()['engenharia']['number'], f"{config.get_contact()['engenharia']['number']}@c.us", whatsapp=whatsapp)
             operator = user
             now = datetime.now()

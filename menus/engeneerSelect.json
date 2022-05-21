@@ -2,7 +2,7 @@
     "options": {
         "*": {
             "1": {
-                "prompt": "Marcação de lote.",
+                "prompt": "Obras",
                 "index_name": "1️⃣"
             },
             "2": {
@@ -10,8 +10,12 @@
                 "index_name": "2️⃣"
             },
             "3": {
-                "prompt": "↩ Voltar à seleção de regiões",
-                "index_name": "3️⃣",
+                "prompt": "Outros",
+                "index_name": "3️⃣"
+            },
+            "4": {
+                "prompt": "↩ Voltar à seleção de regiões.",
+                "index_name": "4️⃣",
                 "action": "menu#citySelect@None"
             }
         }

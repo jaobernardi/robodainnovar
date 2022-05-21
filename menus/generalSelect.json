@@ -2,19 +2,19 @@
     "options": {
         "*": {
             "1": {
-                "prompt": "Item 1",
+                "prompt": "Autorização de escritura",
                 "index_name": "1️⃣"
             },
             "2": {
-                "prompt": "Item 2",
+                "prompt": "Transferencia de posse de imóvel",
                 "index_name": "2️⃣"
             },
             "3": {
-                "prompt": "Item 3",
+                "prompt": "IPTU",
                 "index_name": "3️⃣"
             },
             "4": {
-                "prompt": "IPTU",
+                "prompt": "Outros",
                 "index_name": "4️⃣"
             },
             "5": {
