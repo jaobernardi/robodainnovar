@@ -35,6 +35,10 @@ function loadUtils() {
                 quotedMsgOptions = quotedMessage.msgContextInfo(chat);
             }
             delete options.quotedMessageId;
+            if (options.reaction) {
+                window.Store.sendReactionToMsg(quotedMessage, options.reaction);
+                delete options.reaction;
+            }
         }
 
         if (options.mentionedJidList) {

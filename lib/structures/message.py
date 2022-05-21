@@ -12,10 +12,12 @@ class Message():
     def seen(self):
         self.whatsapp.seen_message(self.chatID)
     
-    def reply(self, msg, qoute=True, file=None):
+    def reply(self, msg, qoute=True, file=None, reaction=None):
         options = {}
         if qoute:
             options["quotedMessageId"] = self.id
+            if reaction:
+                options["reaction"] = reaction
         
         if file:
             file = os.path.abspath(file)
@@ -26,5 +28,5 @@ class Message():
                 "mimetype": mimetypes.guess_type(os.path.abspath(file))[0],
                 "filename": os.path.basename(file)
             }
-
+        
         self.whatsapp.send_message(self.chatID, msg, options)

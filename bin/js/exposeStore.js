@@ -1,5 +1,6 @@
 let exposeStore = () => {
     window.Store = Object.assign({}, window.mR.findModule(m => m.default && m.default.Chat)[0].default);
+    window.Store.sendReactionToMsg = window.mR.findModule("sendReactionToMsg")[0].sendReactionToMsg;
     window.Store.AppState = window.mR.findModule('Socket')[0].Socket;
     window.Store.Conn = window.mR.findModule('Conn')[0].Conn;
     window.Store.BlockContact = window.mR.findModule('blockContact')[0];
