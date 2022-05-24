@@ -17,5 +17,8 @@ async function sendMsg(chatId, message, options = {}) {
     return msg.serialize();
 }
 
-
-await sendMsg(arguments[0], arguments[1], arguments[2])
+setTimeout(() => {
+    sendMsg(arguments[0], arguments[1], arguments[2])
+    .then(e => console.log('Sent message'))
+    .catch(e => console.log('Failed to send message'))
+}, 200);
