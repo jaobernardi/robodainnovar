@@ -44,7 +44,7 @@ def new_message(event, whatsapp, message: Message):
 
             response = message.user.menu.process_option(msg)
             if response == InternalActions.MENUCHANGE:
-                message.reply(message.user.menu.menu_string(), reply='✅')
+                message.reply(message.user.menu.menu_string(), reaction='✅')
             elif response == InternalActions.REQUESTEDEND:
                 if "end" not in message.user.menu.messages:
                     message.reply("</Menu encerrou-se e não deixou nenhuma mensagem de saída.>")
