@@ -184,7 +184,7 @@ class Whatsapp():
             return
         last_msg = msg.id
         pyding.call("whatsapp_new_message", whatsapp=self, message=msg)
-        
+        sleep(0.25)
 
     def loop(self):
  
