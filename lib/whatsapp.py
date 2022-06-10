@@ -40,7 +40,7 @@ class Whatsapp():
         )
 
         # Do changes
-        self.webdriver.set_script_timeout(float("100000000"))
+        self.webdriver.set_script_timeout(float("60"))
 
         # Save tags
         self.threaded = threaded
@@ -92,6 +92,7 @@ class Whatsapp():
 
     def seen_message(self, msg_id):
         self.load_js_from_file("bin/js/sendSeen.js", False, msg_id)
+        #sleep(0.25)
 
     # Selenium interfacing methods
 
@@ -184,7 +185,7 @@ class Whatsapp():
             return
         last_msg = msg.id
         pyding.call("whatsapp_new_message", whatsapp=self, message=msg)
-        sleep(0.25)
+        #sleep(0.25)
 
     def loop(self):
  
@@ -200,7 +201,10 @@ class Whatsapp():
                         pyding.call("whatsapp_new_qr", whatsapp=self, qrcode=qr_code)
                         latest_qr = qr_code
                 case SessionStatus.LOGGED_IN:
-                    self.message_loop()
+                    try:
+                        self.message_loop()
+                    except:
+                        pass
 
     # Driving the webdriver
 

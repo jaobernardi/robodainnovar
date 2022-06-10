@@ -2,12 +2,17 @@
 const done = arguments[arguments.length - 1]
 
 function handle_message(message) {
+    if (message.type == 'e2e_notification') {
+        return
+    }
     if (!message.id.fromMe){
+        window.Store.Msg.removeListener();
         done({
+            "type": message.type,
             "user": {
                 "phonenumber": message.from.user,
                 "id": message.from._serialized,
-                "name": message.chat.contact.__x_notifyName
+                "name": message.chat.contact.__x_notifyName ? message.chat.contact.__x_notifyName : ''
             },
             "message": {
                 "type": message.type,
@@ -20,4 +25,4 @@ function handle_message(message) {
 }
 
 
-window.Store.Msg.once("add", handle_message)
+window.Store.Msg.on("add", handle_message)
