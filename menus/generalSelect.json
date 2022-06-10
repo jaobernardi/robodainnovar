@@ -29,7 +29,7 @@
         "action": "event#menu_atending_call@{carryoption}::{prompt}|$|exit#.@."
     },
     "messages": {
-        "end": "✍️ Certo. Encaminhei as informações que você me passou aos setores responsáveis e, em breve, você receberá ",
+        "end": "Anotado ✍️! Seu pedido foi encaminhado e, em breve, nossa equipe entrará em contato com você. 😉",
         "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente ao assunto do seu atendimento."
     }
 }
