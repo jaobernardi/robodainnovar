@@ -13,6 +13,9 @@ class User():
         self.fetch_database()
         self.whatsapp = whatsapp
 
+    def __eq__(self, __o) -> bool:
+        return self.phonenumber == __o.phonenumber
+
     @property
     def menu(self):
         return self._menu
