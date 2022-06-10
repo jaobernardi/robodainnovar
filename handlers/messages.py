@@ -1,17 +1,32 @@
-from pyding import on
+from pyding import on, call
 import logging
 from lib.structures import InternalActions, Message, Menu
 from lib import database
+from lib.structures.user import User
 
+TEMPORARY_BLOCKS = []
 
 logger = logging.getLogger(__name__)
 
 @on("whatsapp_new_message")
 def new_message(event, whatsapp, message: Message):
-    logging.info(f"[{message.user.phonenumber}] {message.text}")
+
+    logger.debug('-- MESSAGE CHECKS --')
+    logger.debug(f'CHECK: {int(message.user.phonenumber)} in {TEMPORARY_BLOCKS}? {message.user.phonenumber in TEMPORARY_BLOCKS}')
+    logger.debug(f'CHECK: {message.type} == "e2e_notification"? {message.type == "e2e_notification"}')
+    logger.debug(f'CHECK: not {message.text}? {not message.text}')
+    logger.debug(f'SUB CHECK: {message.type} == "e2e_notification" or not {message.text}? {message.type == "e2e_notification" or not message.text}')
+    logger.debug(f'FINAL CHECK: {message.user.phonenumber} in {TEMPORARY_BLOCKS} and ({message.type} == "e2e_notification" or not {message.text})? {message.user.phonenumber in TEMPORARY_BLOCKS and (message.type == "e2e_notification" or not message.text)}')
+    logger.debug('-- END MESSAGE CHECKS --')
+
+    if int(message.user.phonenumber) in TEMPORARY_BLOCKS and (message.type == 'e2e_notification' or not message.text):
+        TEMPORARY_BLOCKS.remove(message.user.phonenumber)
+        return
+    
     logger.info(f"[{message.user.phonenumber}] {message.text}")
     text = message.text.split(" ") if message.text else None
     match text:
+
         case ["!reaction", reaction]:
             message.reply("Okie dokie", reaction=reaction)
         case ["!ping"]:

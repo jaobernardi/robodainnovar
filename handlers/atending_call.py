@@ -2,7 +2,7 @@ from pyding import on
 from lib.structures import User
 from lib import config
 from datetime import datetime
-
+from . import messages
 
 
 @on("menu_atending_call")
@@ -23,6 +23,7 @@ def atending_call(event, carryoption, user: User):
                     operator = operator_info['user']
                     print(operator.id)
                     now = datetime.now()
+                    messages.TEMPORARY_BLOCKS.append(operator.phonenumber)
                     operator.send_message((
                         f"📥 — Requisição de atendimento. (Financeiro)\n"
                         f"Olá {operator_name}! 👋\n"
@@ -37,6 +38,7 @@ def atending_call(event, carryoption, user: User):
             operator = User(config.get_contact()['comercial']['number'], f"{config.get_contact()['comercial']['number']}@c.us", whatsapp=whatsapp)
             #operator = user
             now = datetime.now()
+            messages.TEMPORARY_BLOCKS.append(operator.phonenumber)
             operator.send_message((
                 f"📥 — Requisição de atendimento. (Comercial)\n"
                 f"Olá 👋\n"
@@ -52,6 +54,7 @@ def atending_call(event, carryoption, user: User):
             operator = User(config.get_contact()['engenharia'][operation]['number'], f"{config.get_contact()['engenharia'][operation]['number']}@c.us", whatsapp=whatsapp)
             #operator = user
             now = datetime.now()
+            messages.TEMPORARY_BLOCKS.append(operator.phonenumber)
             operator.send_message((
                 f"📥 — Requisição de atendimento. (Engenharia)\n"
                 f"Olá 👋\n"
@@ -59,6 +62,7 @@ def atending_call(event, carryoption, user: User):
                 f"{user.name} solicitou um atendimento {f'referente à _{operation}_ ' if operation != 'other' else ''}"
                 f"na região de {city}. *Aqui está o contato:*"    
             ))
+            #messages.temporary_blocks.append(operator.phonenumber)
             operator.send_message("", contact=user)
         
         case [city, "Atendimento Geral", operation]:
@@ -67,6 +71,7 @@ def atending_call(event, carryoption, user: User):
             operator = User(config.get_contact()['atendimento geral']['number'], f"{config.get_contact()['atendimento geral']['number']}@c.us", whatsapp=whatsapp)
             #operator = user
             now = datetime.now()
+            messages.TEMPORARY_BLOCKS.append(operator.phonenumber)
             operator.send_message((
                 f"📥 — Requisição de atendimento. (Atendimento Geral)\n"
                 f"Olá 👋\n"
@@ -74,6 +79,7 @@ def atending_call(event, carryoption, user: User):
                 f"{user.name} solicitou um atendimento {f'referente à _{operation}_ ' if operation != 'other' else ''}"
                 f"na região de {city}. *Aqui está o contato:*"    
             ))
+            #messages.temporary_blocks.append(operator.phonenumber)
             operator.send_message("", contact=user)
         
         
