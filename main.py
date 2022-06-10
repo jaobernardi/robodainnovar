@@ -9,6 +9,7 @@ import logging
 from pyding import on
 from qrcode import QRCode
 import argparse
+import time
 
 parser = argparse.ArgumentParser(description='Whatsapp Automation Service.')
 
@@ -17,10 +18,34 @@ parser.add_argument('-sd', '--setup-database', action='store_true', help="Setups
 parser.add_argument('-sf', '--skip-safeguards', action='store_true', help="Skips the whatsapp waiting safeguard")
 parser.add_argument('-sl', '--skip-loop', action='store_true', help="Skips the whatsapp waiting safeguard")
 parser.add_argument('-t', '--threaded', action='store_true', help="Whatsapp main loop thread status")
+parser.add_argument('-d', '--debug', action='store_true', help="Set logging level to debug")
+parser.add_argument('--debug_module', action='store', help='Set logging level of a specific module to debug')
+
 
 args = parser.parse_args()
-logging.basicConfig(level=logging.INFO)
 
+
+def setup_logger(level, filename):
+    logging.basicConfig(
+        level=level,
+        handlers=[
+            logging.FileHandler(filename),
+            logging.StreamHandler()
+        ]
+    )
+
+
+if args.debug:
+    logging.getLogger("selenium").setLevel(logging.INFO)
+    setup_logger(logging.DEBUG, f'logs/{int(time.time())}-DEBUG.log')
+else:
+    setup_logger(logging.INFO, f'logs/{int(time.time())}.log')
+
+
+if args.debug_module:
+    for module in args.debug_module.split(" "):
+        logging.info(f'Setting logging level of {module} to debug')
+        logging.getLogger(module).setLevel(logging.DEBUG)
 
 if args.setup_database:
     setup_tables()

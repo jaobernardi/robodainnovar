@@ -16,6 +16,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 
+logger = logging.getLogger(__name__)
 
 class SessionStatus(Enum):
     LOGGED_IN = auto()
@@ -151,7 +152,7 @@ class Whatsapp():
 
         # Build the selector
         selector = ("//" if not element.startswith("/") else '') + f"{element}" + (f"[{' and '.join(extras)}]" if extras else '') + (f'[{position}]' if position else '')       
-        logging.debug(f"Performing element search with the following selector: {selector}")
+        logger.debug(f"Performing element search with the following selector: {selector}")
         try:
             found = search_scope.find_elements(By.XPATH, selector)
             if not return_all:
@@ -176,7 +177,6 @@ class Whatsapp():
 
     def message_loop(self):
         last_msg = None
-        print("loop")
         # Wait for message
         message = self.load_js_from_file("bin/js/waitMessage.js", asyncronos=True)
         msg = Message(self, message)
@@ -240,16 +240,16 @@ class Whatsapp():
         # Go to the website
         event = pyding.call("whatsapp_warmup", blocking=False, cancellable=True, whatsapp=self)
         if event.cancelled:
-            logging.info("WhatsApp startup cancelled due to event cancel.")
+            logger.info("WhatsApp startup cancelled due to event cancel.")
             return
 
         self.webdriver.get("https://web.whatsapp.com/")
 
         if not skip_safeguards:
-            logging.info("Waiting for whatsapp to load.")
+            logger.info("Waiting for whatsapp to load.")
             while self.is_loading:
                 pass
-            logging.info("Whatsapp loaded.")
+            logger.info("Whatsapp loaded.")
         
         self.expose_store()
 

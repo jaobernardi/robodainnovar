@@ -4,9 +4,12 @@ from lib.structures import InternalActions, Message, Menu
 from lib import database
 
 
+logger = logging.getLogger(__name__)
+
 @on("whatsapp_new_message")
 def new_message(event, whatsapp, message: Message):
     logging.info(f"[{message.user.phonenumber}] {message.text}")
+    logger.info(f"[{message.user.phonenumber}] {message.text}")
     text = message.text.split(" ") if message.text else None
     match text:
         case ["!reaction", reaction]:

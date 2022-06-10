@@ -3,6 +3,7 @@ import os
 import sys
 import traceback
 
+logger = logging.getLogger(__name__)
 
 def load_handlers():
     for handler in os.listdir("handlers"):
@@ -10,5 +11,5 @@ def load_handlers():
             try:
                 __import__("handlers."+handler.removesuffix(".py"))
             except:
-                logging.error(f"Failed to load handler {handler}")
+                logger.error(f"Failed to load handler {handler}")
                 traceback.print_exc(file=sys.stdout)

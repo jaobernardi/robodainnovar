@@ -5,6 +5,8 @@ import sqlite3
 from .structures import Menu
 from . import config
 
+logger = logging.getLogger(__name__)
+
 tables = [
     """
     CREATE TABLE `Users`(
@@ -47,7 +49,7 @@ class Database(object):
 
 
 def setup_tables():
-    logging.info("Setting up tables.")
+    logger.info("Setting up tables.")
     with Database() as db:
         for sql in tables:
             db.execute(sql)
