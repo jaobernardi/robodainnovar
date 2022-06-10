@@ -1,6 +1,6 @@
 {
     "options": {
-        "outside": {
+        "outside-suppressed": {
             "1": {
                 "prompt": "Comercial",
                 "index_name": "1️⃣",
