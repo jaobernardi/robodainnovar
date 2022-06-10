@@ -27,11 +27,18 @@ def new_message(event, whatsapp, message: Message):
     text = message.text.split(" ") if message.text else None
     match text:
 
-        case ["!reaction", reaction]:
-            message.reply("Okie dokie", reaction=reaction)
+        case ["!send", "assets"]:
+            message.reply("Caption", file='assets/teste.jpeg')
+
         case ["!ping"]:
             message.reply("Pong!")
         
+        case ['!get', 'global', variable]:
+            message.reply(repr(globals()[variable]))
+
+        case ['!get', 'locals', variable]:
+            message.reply(repr(locals()[variable]))
+
         case ["!about"]:
             message.reply("*Whatpy* version *6.0.1-BETA* by _@jaobernard_")
 
