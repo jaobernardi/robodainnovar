@@ -6,10 +6,10 @@ import os
 
 
 class User():
-    def __init__(self, phonenumber, id, name=None, whatsapp=None):
+    def __init__(self, phonenumber, id, name='', whatsapp=None):
         self.phonenumber = phonenumber
         self.id = id
-        self.name = name
+        self.name = name if name else ''
         self.fetch_database()
         self.whatsapp = whatsapp
 
