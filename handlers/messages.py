@@ -2,6 +2,7 @@ from pyding import on, call
 import logging
 from lib.structures import InternalActions, Message, Menu
 from lib import database
+from lib.whatsapp import Whatsapp
 from lib.structures.user import User
 
 TEMPORARY_BLOCKS = []
@@ -9,7 +10,7 @@ TEMPORARY_BLOCKS = []
 logger = logging.getLogger(__name__)
 
 @on("whatsapp_new_message")
-def new_message(event, whatsapp, message: Message):
+def new_message(event, whatsapp: Whatsapp, message: Message):
 
     logger.debug('-- MESSAGE CHECKS --')
     logger.debug(f'CHECK: {repr(message.user.phonenumber)} in {repr(TEMPORARY_BLOCKS)}? {message.user.phonenumber in TEMPORARY_BLOCKS}')
