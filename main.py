@@ -1,7 +1,9 @@
 from lib.patching import patch
+import os
 # Path urlib stuff
 patch()
 
+from lib import config
 from lib.whatsapp import Whatsapp, SessionStatus
 from lib.database import setup_tables
 from lib.utils import load_handlers
@@ -20,6 +22,7 @@ parser.add_argument('-sl', '--skip-loop', action='store_true', help="Skips the w
 parser.add_argument('-t', '--threaded', action='store_true', help="Whatsapp main loop thread status")
 parser.add_argument('-d', '--debug', action='store_true', help="Set logging level to debug")
 parser.add_argument('--debug_module', action='store', help='Set logging level of a specific module to debug')
+parser.add_argument('--reset_session', action='store_true', help='Resets chromedriver user session')
 
 
 args = parser.parse_args()
@@ -34,6 +37,9 @@ def setup_logger(level, filename):
         ]
     )
 
+
+if args.reset_session:
+    os.system(f'rm -rf {config.get_session_path()}*')
 
 if args.debug:
     logging.getLogger("selenium").setLevel(logging.INFO)
