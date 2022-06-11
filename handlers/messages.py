@@ -27,22 +27,31 @@ def new_message(event, whatsapp, message: Message):
     text = message.text.split(" ") if message.text else None
     match text:
 
-        case ["!send", "assets"]:
+        case ["!send", "assets"] if message.user.has_permission("commands.send.assets"):
             message.reply("Caption", file='assets/teste.jpeg')
 
-        case ["!ping"]:
+        case ["!send", "reaction", reaction] if message.user.has_permission("commands.send.reactions"):
+            message.reply('', reaction=reaction)
+
+        case ["!ping"] if message.user.has_permission("commands.ping"):
             message.reply("Pong!")
         
-        case ['!get', 'global', variable]:
+        case ['!execute', 'script', script] if message.user.has_permission("commands.scripts.excecute"):
+            whatsapp.load_js_from_file(f"bin/js/{script}")
+
+        case ["!get", "user", user] if message.user.has_permission("commands.get.user"):
+            message.reply("", contact=User(user, f"{user}@c.us"))
+
+        case ['!get', 'global', variable] if message.user.has_permission("commands.get.globals"):
             message.reply(repr(globals()[variable]))
 
-        case ['!get', 'locals', variable]:
+        case ['!get', 'locals', variable] if message.user.has_permission("commands.get.locals"):
             message.reply(repr(locals()[variable]))
 
         case ["!about"]:
             message.reply("*Whatpy* version *6.0.1-BETA* by _@jaobernard_")
 
-        case ["!set", "menu", menu]:
+        case ["!set", "menu", menu] if message.user.has_permission("commands.set.menu"):
             message.user.menu = Menu(menu)
             message.user.update_database()
             message.reply(message.user.menu.messages['welcome'], reaction="👋")
