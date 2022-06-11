@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 def new_message(event, whatsapp, message: Message):
 
     logger.debug('-- MESSAGE CHECKS --')
-    logger.debug(f'CHECK: {int(message.user.phonenumber)} in {TEMPORARY_BLOCKS}? {message.user.phonenumber in TEMPORARY_BLOCKS}')
-    logger.debug(f'CHECK: {message.type} == "e2e_notification"? {message.type == "e2e_notification"}')
-    logger.debug(f'CHECK: not {message.text}? {not message.text}')
-    logger.debug(f'SUB CHECK: {message.type} == "e2e_notification" or not {message.text}? {message.type == "e2e_notification" or not message.text}')
-    logger.debug(f'FINAL CHECK: {message.user.phonenumber} in {TEMPORARY_BLOCKS} and ({message.type} == "e2e_notification" or not {message.text})? {message.user.phonenumber in TEMPORARY_BLOCKS and (message.type == "e2e_notification" or not message.text)}')
+    logger.debug(f'CHECK: {repr(message.user.phonenumber)} in {repr(TEMPORARY_BLOCKS)}? {message.user.phonenumber in TEMPORARY_BLOCKS}')
+    logger.debug(f'CHECK: {repr(message.type)} == "e2e_notification"? {message.type == "e2e_notification"}')
+    logger.debug(f'CHECK: not {repr(message.text)}? {not message.text}')
+    logger.debug(f'SUB CHECK: {repr(message.type)} == "e2e_notification" or not {repr(message.text)}? {message.type == "e2e_notification" or not message.text}')
+    logger.debug(f'FINAL CHECK: {repr(message.user.phonenumber)} in {repr(TEMPORARY_BLOCKS)} and ({repr(message.type)} == "e2e_notification" or not {repr(message.text)})? {message.user.phonenumber in TEMPORARY_BLOCKS and (message.type == "e2e_notification" or not message.text)}')
     logger.debug('-- END MESSAGE CHECKS --')
 
     if int(message.user.phonenumber) in TEMPORARY_BLOCKS and (message.type == 'e2e_notification' or not message.text):
