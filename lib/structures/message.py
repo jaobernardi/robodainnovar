@@ -12,13 +12,18 @@ class Message():
     def seen(self):
         self.whatsapp.seen_message(self.chatID)
     
-    def reply(self, msg, qoute=True, file=None, reaction=None):
+    def reply(self, msg, qoute=True, file=None, reaction=None, contact=None):
         options = {}
         if qoute:
             options["quotedMessageId"] = self.id
             if reaction:
                 options["reaction"] = reaction
         
+        if contact:
+            options['contactCard'] = contact.id
+            options['contactCardName'] = contact.name or contact.phonenumber
+            options['vcard'] = contact.vcard
+
         if file:
             file = os.path.abspath(file)
             with open(file, "rb") as f:
