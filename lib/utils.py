@@ -42,3 +42,19 @@ def load_handlers():
             except:
                 logger.error(f"Failed to load handler {handler}")
                 traceback.print_exc(file=sys.stdout)
+
+@InitializeArguments
+def parse_number(number: str):
+    country_code, ddd, first, second = "", "", "", ""
+    index = 0
+    for int in number:
+        if index in [0, 1]:
+            country_code += int
+        elif index in [2, 3]:
+            ddd += int
+        elif index in [4,5,6,7]:
+            first += int
+        else:
+            second += int
+        index += 1
+    return f"+{country_code} {ddd} {first}-{second}"
