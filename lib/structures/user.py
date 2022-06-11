@@ -34,7 +34,12 @@ class User():
             self.permissions, self._menu = [], None
             return
 
-        phonenumber, self.name, self.permissions, self._menu = response
+        phonenumber, name, self.permissions, self._menu = response
+        if name != self.name and self.name:
+            self.update_database()
+        else:
+            self.name = name 
+        
         if self._menu:
             self._menu.context['user'] = self
 
