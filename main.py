@@ -1,3 +1,4 @@
+from itertools import accumulate
 from lib.patching import patch
 import os
 # Path urlib stuff
@@ -21,7 +22,7 @@ parser.add_argument('-sf', '--skip-safeguards', action='store_true', help="Skips
 parser.add_argument('-sl', '--skip-loop', action='store_true', help="Skips the whatsapp waiting safeguard")
 parser.add_argument('-t', '--threaded', action='store_true', help="Whatsapp main loop thread status")
 parser.add_argument('-d', '--debug', action='store_true', help="Set logging level to debug")
-parser.add_argument('--debug_module', action='store', help='Set logging level of a specific module to debug')
+parser.add_argument('--debug_module', nargs='+', help='Set logging level of a specific module to debug')
 parser.add_argument('--reset_session', action='store_true', help='Resets chromedriver user session')
 
 
@@ -49,7 +50,7 @@ else:
 
 
 if args.debug_module:
-    for module in args.debug_module.split(" "):
+    for module in args.debug_module:
         logging.info(f'Setting logging level of {module} to debug')
         logging.getLogger(module).setLevel(logging.DEBUG)
 
