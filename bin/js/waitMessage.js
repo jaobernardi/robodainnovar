@@ -2,9 +2,10 @@
 const done = arguments[arguments.length - 1]
 
 function handle_message(message) {
-    if (message.type == 'e2e_notification') {
+    if (message.type == 'e2e_notification' || !message.isNewMsg) {
         return
     }
+    
     if (!message.id.fromMe){
         window.Store.Msg.removeListener();
         done({
