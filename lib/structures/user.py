@@ -1,4 +1,4 @@
-from .. import database
+from .. import database, utils
 from . import Menu
 from base64 import b64encode
 import mimetypes
@@ -15,6 +15,18 @@ class User():
 
     def __eq__(self, __o) -> bool:
         return self.phonenumber == __o.phonenumber
+
+    @classmethod
+    def from_phonenumber(cls, number):
+        return cls(number, f'{number}@c.us')
+
+    @property
+    def vcard(self):
+        return f'BEGIN:VCARD\nVERSION:3.0\nN:;{self.name or self.parsed_number};;;\nFN:{self.name or self.parsed_number}\nTEL;type=CELL;waid={self.phonenumber}:{self.parsed_number}\nEND:VCARD'
+
+    @property
+    def parsed_number(self):
+        return utils.parse_number(self.phonenumber)
 
     @property
     def menu(self):
@@ -52,6 +64,8 @@ class User():
 
         if contact:
             options['contactCard'] = contact.id
+            options['contactCardName'] = contact.name or contact.phonenumber
+            options['vcard'] = contact.vcard
 
         elif file:
             file = os.path.abspath(file)
