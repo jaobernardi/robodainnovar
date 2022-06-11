@@ -57,14 +57,26 @@ function loadUtils() {
         }
 
         let vcardOptions = {};
+        let createvCard = (contact) => {
+            let data = {
+                cc: contact.id.user.substr(0, 2),
+                ddd: contact.id.user.substr(2, 2),
+                first: contact.id.user.substr(4, 4),
+                second: contact.id.user.substr(8, 4)
+            }
+            return `BEGIN:VCARD\nVERSION:3.0\nN:;${contact.__x_notifyName};;;\nFN:${contact.__x_notifyName}\nTEL;type=CELL;waid=${contact.id.user}:+${data.cc} ${data.ddd} ${data.first}-${data.second}\nEND:VCARD`
+        }
         if (options.contactCard) {
             let contact = window.Store.Contact.get(options.contactCard);
             vcardOptions = {
-                body: window.Store.VCard.vcardFromContactModel(contact).vcard,
+                body: createvCard(contact),
                 type: 'vcard',
-                vcardFormattedName: contact.formattedName
+                vcardFormattedName: contact.pushname
             };
+            console.log(vcardOptions);
             delete options.contactCard;
+            delete options.contactCardName;
+            delete options.vcard;
         } else if (options.contactCardList) {
             let contacts = options.contactCardList.map(c => window.Store.Contact.get(c));
             let vcards = contacts.map(c => window.Store.VCard.vcardFromContactModel(c));
