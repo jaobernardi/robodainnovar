@@ -12,6 +12,9 @@ class Message():
     def seen(self):
         self.whatsapp.seen_message(self.chatID)
     
+    def react(self, reaction):
+        self.whatsapp.send_reaction(self.chatID, self.id, reaction)
+
     def reply(self, msg, qoute=True, file=None, reaction=None, contact=None):
         options = {}
         if qoute:
