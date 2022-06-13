@@ -91,6 +91,9 @@ class Whatsapp():
     def send_message(self, chat_id, msg, options = None):
         self.load_js_from_file("bin/js/sendMessage.js", False, chat_id, msg, options or {})
 
+    def send_reaction(self, chat_id, msg, reaction):
+        self.load_js_from_file("bin/js/sendReaction.js", False, chat_id, msg, reaction)
+
     def seen_message(self, msg_id):
         self.load_js_from_file("bin/js/sendSeen.js", False, msg_id)
         #sleep(0.25)
@@ -203,7 +206,7 @@ class Whatsapp():
                 case SessionStatus.LOGGED_IN:
                     try:
                         self.message_loop()
-                    except:
+                    except Exception as e:
                         pass
 
     # Driving the webdriver

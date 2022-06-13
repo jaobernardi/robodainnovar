@@ -10,6 +10,10 @@ function loadUtils() {
         return false;
 
     };
+    window.WWebJS.sendReaction = async (messageID, reaction) => {
+        let msg = window.Store.Msg.get(messageID);
+        window.Store.sendReactionToMsg(msg, reaction);
+    }
 
     window.WWebJS.sendMessage = async (chat, content, options = {}) => {
         let attOptions = {};
