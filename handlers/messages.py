@@ -1,19 +1,20 @@
 import importlib
+import io
+import sys
 from pyding import on, EventCall, event_space
 import logging
 from . import atending_call
 from lib.structures import InternalActions, Message, Menu
-from lib import database
 from lib.whatsapp import Whatsapp
 from lib.structures.user import User
+from contextlib import redirect_stdout
 
 TEMPORARY_BLOCKS = []
 
 logger = logging.getLogger(__name__)
 
 @on("whatsapp_new_message")
-def new_message(event, whatsapp: Whatsapp, message: Message):
-
+def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
     logger.debug('-- MESSAGE CHECKS --')
     logger.debug(f'CHECK: {repr(message.user.phonenumber)} in {repr(TEMPORARY_BLOCKS)}? {message.user.phonenumber in TEMPORARY_BLOCKS}')
     logger.debug(f'CHECK: {repr(message.type)} == "e2e_notification"? {message.type == "e2e_notification"}')
@@ -44,6 +45,21 @@ def new_message(event, whatsapp: Whatsapp, message: Message):
 
         case ["!get", "user", user] if message.user.has_permission("commands.get.user"):
             message.reply("", contact=User(user, f"{user}@c.us"))
+
+        case ["!debug", 'eval', *eval_text] if message.user.has_permission("commands.eval"):
+            message.react('👩‍💻')
+            eval_text = " ".join(eval_text)
+            try:
+                stdout = io.StringIO()
+                with redirect_stdout(stdout):
+                    code = compile(eval_text, '<exec>', 'single' if '\n' not in eval_text else 'exec')
+                    exec(code, globals(), locals())
+            except Exception as e:
+                message.react('❌')
+                message.reply(repr(e))
+            else:
+                message.react('✅')
+                message.reply(f"```Código Executado:```\n{stdout.getvalue() or '_...</silêncio>..._'}")
 
         case ['!get', 'global', variable] if message.user.has_permission("commands.get.globals"):
             message.reply(repr(globals()[variable]))
