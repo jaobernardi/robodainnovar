@@ -1,5 +1,7 @@
-from pyding import on, call
+import importlib
+from pyding import on, EventCall, event_space
 import logging
+from . import atending_call
 from lib.structures import InternalActions, Message, Menu
 from lib import database
 from lib.whatsapp import Whatsapp
@@ -52,6 +54,14 @@ def new_message(event, whatsapp: Whatsapp, message: Message):
         case ["!about"]:
             message.reply("*Whatpy* version *6.0.1-BETA* by _@jaobernard_")
 
+        case ["!reload"] if message.user.has_permission("commands.reload"):
+            event_space.global_event_space.unregister_from_module(atending_call)
+            importlib.reload(atending_call)
+            event_space.global_event_space.unregister_from_module(sys.modules[__name__])
+            importlib.reload(sys.modules[__name__])
+            message.reply("✅ Código recarregado", reaction='✅')
+
+        
         case ["!set", "menu", menu] if message.user.has_permission("commands.set.menu"):
             message.user.menu = Menu(menu)
             message.user.update_database()
