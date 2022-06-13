@@ -55,7 +55,7 @@
         "action": "event#menu_atending_call@{prompt}_{carryoption}|$|exit#.@."
     },
     "messages": {
-        "end": "Anotado ✍️! Seu pedido foi encaminhado e, em breve, nossa equipe entrará em contato com você. 😉",
+        "end": "Anotado ✍️! Seu pedido foi encaminhado e, em breve, nossa equipe entrará em contato com você. 😉\n👉🏻Lembrando que nosso horário de atendimento é de segunda à sexta, das 8h ao 12h e 13:30 as 17:30.",
         "wrong": "📛 — Esta não é uma opção válida. Verifique a lista e envie o número correspondente ao assunto do seu atendimento."
     }
 }
