@@ -9,6 +9,7 @@ from lib.whatsapp import Whatsapp
 from lib.structures.user import User
 from contextlib import redirect_stdout
 
+
 TEMPORARY_BLOCKS = []
 
 logger = logging.getLogger(__name__)
@@ -38,7 +39,7 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
             message.reply('', reaction=reaction)
 
         case ["!ping"] if message.user.has_permission("commands.ping"):
-            message.reply("Pong!")
+            message.reply("Pong!!!!")
         
         case ['!execute', 'script', script] if message.user.has_permission("commands.scripts.excecute"):
             whatsapp.load_js_from_file(f"bin/js/{script}")
@@ -68,7 +69,11 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
             message.reply(repr(locals()[variable]))
 
         case ["!about"]:
-            message.reply("*Whatpy* version *6.0.1-BETA* by _@jaobernard_")
+            message.reply("*Whatpy* version *6.0.1-STABLE* by _@jaobernard_")
+
+        case ["!reset"]:
+            message.user.menu = None
+            
 
         case ["!reload"] if message.user.has_permission("commands.reload"):
             event_space.global_event_space.unregister_from_module(atending_call)
