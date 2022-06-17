@@ -13,7 +13,7 @@ function handle_message(message) {
             "user": {
                 "phonenumber": message.from.user,
                 "id": message.from._serialized,
-                "name": message.chat.contact.__x_notifyName ? message.chat.contact.__x_notifyName : (message.chat.contact.__x_displayName ? message.chat.contact.__x_displayName : '')
+                "name": message.chat.contact.__x_notifyName ? message.chat.contact.__x_notifyName : ''
             },
             "message": {
                 "type": message.type,
