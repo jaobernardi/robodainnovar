@@ -29,7 +29,7 @@ class Whatsapp():
     def __init__(self, threaded=False, headless=True):
         # Setup drivers
         options = Options()
-        options.add_argument(f"--user-data-dir={path.abspath(config.get_session_path())}".format(system=system().lower()))
+        options.add_argument(f"--user-data-dir={path.abspath(config.get_session_path())}")
         options.add_argument(f"--no-sandbox")
         if headless:
             options.add_argument("--headless")
@@ -37,7 +37,7 @@ class Whatsapp():
 
         # Open chrome
         self.webdriver = webdriver.Chrome(
-            executable_path=config.get_chrome_path(),
+            executable_path=config.get_chrome_path().format(system=system().lower()),
             chrome_options=options
         )
 
