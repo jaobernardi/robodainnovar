@@ -1,7 +1,7 @@
 {
     "bin": "bin/",
     "emotes_path": "bin/emotes.json",
-    "chrome_path": "bin/chromedriver",
+    "chrome_path": "bin/chromedriver-{system}",
     "session_path": "bin/session/",
     "database": {
         "type": "sqlite3",
