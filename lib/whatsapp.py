@@ -4,6 +4,7 @@ import pyding
 from .structures import Message
 from . import config
 
+from platform import system
 from threading import Thread
 from enum import Enum, auto
 from typing import Any
@@ -28,7 +29,7 @@ class Whatsapp():
     def __init__(self, threaded=False, headless=True):
         # Setup drivers
         options = Options()
-        options.add_argument(f"--user-data-dir={path.abspath(config.get_session_path())}")
+        options.add_argument(f"--user-data-dir={path.abspath(config.get_session_path())}".format(system=system().lower()))
         options.add_argument(f"--no-sandbox")
         if headless:
             options.add_argument("--headless")
