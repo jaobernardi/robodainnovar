@@ -4,6 +4,8 @@ import os
 # Path urlib stuff
 patch()
 
+from lib.logging import setup_logger, setup_logging
+setup_logging()
 from lib import config
 from lib.whatsapp import Whatsapp, SessionStatus
 from lib.database import setup_tables
@@ -27,31 +29,24 @@ parser.add_argument('--reset_session', action='store_true', help='Resets chromed
 
 
 args = parser.parse_args()
+LOGGER_BASENAME = str(time.time())
 
-
-def setup_logger(level, filename):
-    logging.basicConfig(
-        level=level,
-        handlers=[
-            logging.FileHandler(filename),
-            logging.StreamHandler()
-        ]
-    )
-
+logger = logging.getLogger("__main__")
 
 if args.reset_session:
     os.system(f'rm -rf {config.get_session_path()}*')
+    exit(0)
 
 if args.debug:
     logging.getLogger("selenium").setLevel(logging.INFO)
-    setup_logger(logging.DEBUG, f'logs/{int(time.time())}-DEBUG.log')
+    setup_logger(logging.DEBUG, f'logs/{LOGGER_BASENAME}-DEBUG.log')
 else:
-    setup_logger(logging.INFO, f'logs/{int(time.time())}.log')
+    setup_logger(logging.INFO, f'logs/{LOGGER_BASENAME}.log')
 
 
 if args.debug_module:
     for module in args.debug_module:
-        logging.info(f'Setting logging level of {module} to debug')
+        logger.info(f'Setting logging level of {module} to debug')
         logging.getLogger(module).setLevel(logging.DEBUG)
 
 if args.setup_database:
@@ -61,7 +56,8 @@ whats = Whatsapp(headless=not args.headfull, threaded=args.threaded)
 
 @on("whatsapp_new_qr")
 def new_qr(event, whatsapp: Whatsapp, qrcode):
-    logging.info("Please, log in using the following qr-code:")
+    logger.info(f"Login string: {qrcode}")
+    logger.info("Please, log in using the following qr-code:")
     qr = QRCode()
     qr.add_data(qrcode)
     qr.print_ascii(invert=True)
@@ -75,11 +71,11 @@ def session_update(event, whatsapp, old_status, new_status):
         SessionStatus.LOADING: "loading"
     }
     
-    logging.info(f"Session status changed to: {conversion_table[new_status]}")
+    logger.info(f"Session status changed to: {conversion_table[new_status]}")
 
 
 if __name__ == "__main__":
-    load_handlers()
+    load_handlers(LOGGER_BASENAME)
 
     whats.start(args.skip_safeguards, args.skip_loop)
 
