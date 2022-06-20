@@ -53,7 +53,7 @@ class Menu():
 
     def load(self):
         path = Path(config.get_menu_path()) / (self.name + ".json")
-        file = open(path)
+        file = open(path, encoding="utf-8")
         self.data = load(file)
         file.close()
     
