@@ -1,7 +1,7 @@
 import importlib
 import io
 import sys
-from pyding import on, EventCall, event_space
+from pyding import on, EventCall, event_space, call
 import logging
 from . import atending_call
 from lib.structures import InternalActions, Message, Menu
@@ -29,7 +29,7 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
         return
     
     logger.info(f"[{message.user.phonenumber}] {message.text}")
-    text = message.text.split(" ") if message.text else None
+    text = [i.lower() for i in message.text.split(" ")] if message.text else None
     match text:
 
         case ["!send", "assets"] if message.user.has_permission("commands.send.assets"):
@@ -62,6 +62,9 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
                 message.react('✅')
                 message.reply(f"```Código Executado:```\n{stdout.getvalue() or '_...</silêncio>..._'}")
 
+        case ["!debug", "force", user, message_id]:
+            call("whatsapp_new_message", whatsapp=whatsapp, message=Message())
+
         case ["!debug", "raise"] if message.user.has_permission("commands.eval"):
             raise Exception()
 
@@ -76,7 +79,9 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
 
         case ["!reset"]:
             message.user.menu = None
-            
+        
+        case ["👍"] | ["muito", "obrigado" | "obrigada"] | ["valeu"] | ["obrigado" | "obrigada"]:
+            message.reply("Disponha! Se tiver qualquer outra solicitação, basta enviar outra mensagem que lhe enviarei o menu de opções 😉")
 
         case ["!reload"] if message.user.has_permission("commands.reload"):
             event_space.global_event_space.unregister_from_module(atending_call)
