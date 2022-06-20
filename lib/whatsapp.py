@@ -32,6 +32,7 @@ class Whatsapp():
         options = Options()
         options.add_argument(f"--user-data-dir={path.abspath(config.get_session_path())}")
         options.add_argument(f"--no-sandbox")
+        options.add_argument("--log-level=3")
         if headless:
             options.add_argument("--headless")
             options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36")
