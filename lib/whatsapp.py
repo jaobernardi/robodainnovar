@@ -36,9 +36,10 @@ class Whatsapp():
             options.add_argument("--headless")
             options.add_argument("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36")
 
+        platform = system()
         # Open chrome
         self.webdriver = webdriver.Chrome(
-            executable_path=config.get_chrome_path().format(system=system().lower()),
+            executable_path=config.get_chrome_path().format(system=platform.lower())+('.exe' if platform == 'Windows' else ''),
             chrome_options=options
         )
 
