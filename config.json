@@ -7,6 +7,9 @@
         "type": "sqlite3",
         "address": "database/users.sql"
     },
+    "credentials": {
+        "google_nlp": "credentials/steady-mason-293020-dfd74d1780d7.json"
+    },
     "menu_path": "menus/",
     "atendings": {
         "Financeiro": {

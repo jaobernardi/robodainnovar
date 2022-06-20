@@ -1,4 +1,5 @@
 selenium
 pyding>=1.5.0
 qrcode
+google-cloud-language
 colorama
