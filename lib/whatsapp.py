@@ -1,9 +1,11 @@
 import logging
+import traceback
 import pyding
 
 from .structures import Message
 from . import config
 
+from platform import system
 from threading import Thread
 from enum import Enum, auto
 from typing import Any
@@ -14,7 +16,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException, TimeoutException
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +38,7 @@ class Whatsapp():
 
         # Open chrome
         self.webdriver = webdriver.Chrome(
-            executable_path=config.get_chrome_path(),
+            executable_path=config.get_chrome_path().format(system=system().lower()),
             chrome_options=options
         )
 
@@ -155,7 +157,6 @@ class Whatsapp():
 
         # Build the selector
         selector = ("//" if not element.startswith("/") else '') + f"{element}" + (f"[{' and '.join(extras)}]" if extras else '') + (f'[{position}]' if position else '')       
-        logger.debug(f"Performing element search with the following selector: {selector}")
         try:
             found = search_scope.find_elements(By.XPATH, selector)
             if not return_all:
@@ -181,20 +182,26 @@ class Whatsapp():
     def message_loop(self):
         last_msg = None
         # Wait for message
+        logger.debug('Waiting for message')
         message = self.load_js_from_file("bin/js/waitMessage.js", asyncronos=True)
+        logger.debug('Recieved response from javascript')
+        logger.debug('Instancing message object')
         msg = Message(self, message)
+        logger.debug('Performing checks')
         # Prevent duplicate readings
         if msg.id == last_msg:
+            logger.debug('Message bypass — Identical id')
             return
         last_msg = msg.id
+        logger.debug('Calling events')
         pyding.call("whatsapp_new_message", whatsapp=self, message=msg)
-        #sleep(0.25)
+
 
     def loop(self):
  
         latest_qr = None
         latest_status = self.current_status
-        while True:
+        while self.running:
             # Split commands per session status
             match self.current_status:
                 # Landing page
@@ -206,8 +213,15 @@ class Whatsapp():
                 case SessionStatus.LOGGED_IN:
                     try:
                         self.message_loop()
-                    except Exception as e:
-                        pass
+                    except TimeoutException:
+                        logger.debug('Message waiter timeouted')
+                    except KeyboardInterrupt:
+                        self.running = False
+                        self.die()
+                        break
+                    except:
+                        logger.critical('Message loop raised an exception:')
+                        logger.critical(traceback.format_exc())
 
     # Driving the webdriver
 

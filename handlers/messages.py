@@ -62,6 +62,9 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
                 message.react('✅')
                 message.reply(f"```Código Executado:```\n{stdout.getvalue() or '_...</silêncio>..._'}")
 
+        case ["!debug", "raise"] if message.user.has_permission("commands.eval"):
+            raise Exception()
+
         case ['!get', 'global', variable] if message.user.has_permission("commands.get.globals"):
             message.reply(repr(globals()[variable]))
 
