@@ -25,5 +25,5 @@ function handle_message(message) {
     }
 }
 
-
+window.Store.call_message = handle_message
 window.Store.Msg.on("add", handle_message)
