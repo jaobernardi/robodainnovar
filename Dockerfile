@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.10.5-windowsservercore-ltsc2022
+FROM python:3.10.1-windowsservercore-ltsc2016
 COPY . .
 RUN pip install -r requirements.txt
 RUN echo 'pull down choco'
