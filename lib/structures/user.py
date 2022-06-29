@@ -6,7 +6,7 @@ import os
 
 
 class User():
-    def __init__(self, phonenumber, id, name='', whatsapp=None):
+    def __init__(self, phonenumber, id, name=None, whatsapp=None):
         self.phonenumber = phonenumber
         self.id = id
         self.name = name if name else ''
@@ -15,6 +15,10 @@ class User():
 
     def __eq__(self, __o) -> bool:
         return self.phonenumber == __o.phonenumber
+
+    @classmethod
+    def no_id(cls, number, name, **extras):
+        return cls(number, f'{number}@c.us', name, **extras) 
 
     @classmethod
     def from_phonenumber(cls, number):
