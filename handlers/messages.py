@@ -3,8 +3,9 @@ import io
 import sys
 from pyding import on, EventCall, event_space, call
 import logging
+
 from . import atending_call
-from lib.structures import InternalActions, Message, Menu
+from lib.structures import InternalActions, Message, Menu, Card
 from lib.whatsapp import Whatsapp
 from lib.structures.user import User
 from contextlib import redirect_stdout
@@ -90,7 +91,11 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
             importlib.reload(sys.modules[__name__])
             message.reply("✅ Código recarregado", reaction='✅')
 
-        
+        case ["!load", "card", card] if message.user.has_permission("commands.invoke.card"):
+            card = Card(card)
+            invoke_msg, event = card.call(whatsapp=whatsapp)
+            message.reply(invoke_msg)
+
         case ["!set", "menu", menu] if message.user.has_permission("commands.set.menu"):
             message.user.menu = Menu(menu)
             message.user.update_database()
