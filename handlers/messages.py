@@ -45,8 +45,28 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
         case ['!execute', 'script', script] if message.user.has_permission("commands.scripts.excecute"):
             whatsapp.load_js_from_file(f"bin/js/{script}")
 
-        case ["!get", "user", user] if message.user.has_permission("commands.get.user"):
+        case ["!get", "user", user] if message.user.has_permission("users.get"):
             message.reply("", contact=User(user, f"{user}@c.us"))
+
+        case ["!get", "user", user, "permissions"] if message.user.has_permission("users.get.permissions"):
+            user = User(user, f"{user}@c.us")
+            message.reply(f"This user has the following permissions: {', '.join(user.permissions)}")
+
+        case ["!add", "permission", permission, "to", user] if message.user.has_permission("users.add.permission") and message.user.has_permission(permission):
+            user = User.from_phonenumber(user)
+            user.permissions.append(permission)
+            user.update_database()
+            message.react('✅')
+            message.reply(f"Added permission {permission} to {user.name or user.phonenumber}")
+
+        case ["!remove", "permission", permission, "from", user] if message.user.has_permission("users.remove.permission") and message.user.has_permission(permission):
+            user = User.from_phonenumber(user)
+            if permission in user.permissions:
+                user.permissions.remove(permission)
+            user.update_database()
+            message.react('✅')
+            message.reply(f"Removed permission {permission} from {user.name or user.phonenumber}")
+
 
         case ["!debug", 'eval', *eval_text] if message.user.has_permission("commands.eval"):
             message.react('👩‍💻')
@@ -91,7 +111,7 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
             importlib.reload(sys.modules[__name__])
             message.reply("✅ Código recarregado", reaction='✅')
 
-        case ["!load", "card", card] if message.user.has_permission("commands.invoke.card"):
+        case ["!load", "card", card] if message.user.has_permission("commands.cards.invoke"):
             card = Card(card)
             invoke_msg, event = card.call(whatsapp=whatsapp)
             message.reply(invoke_msg)
