@@ -4,7 +4,7 @@ import sys
 from pyding import on, EventCall, event_space, call
 import logging
 
-from . import atending_call
+from . import atending_call, broadcast_cards
 from lib.structures import InternalActions, Message, Menu, Card
 from lib.whatsapp import Whatsapp
 from lib.structures.user import User
@@ -107,14 +107,24 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
         case ["!reload"] if message.user.has_permission("commands.reload"):
             event_space.global_event_space.unregister_from_module(atending_call)
             importlib.reload(atending_call)
+            event_space.global_event_space.unregister_from_module(broadcast_cards)
+            importlib.reload(broadcast_cards)
             event_space.global_event_space.unregister_from_module(sys.modules[__name__])
             importlib.reload(sys.modules[__name__])
             message.reply("✅ Código recarregado", reaction='✅')
 
+        case ["!load", "card", card, "override", parameter] if message.user.has_permission("commands.cards.invoke"):
+            card = Card(card)
+            extras = {}
+            if parameter == "recipients":
+                extras["recipient_override"] = message.user
+            invoke_msg, event = card.call(whatsapp=whatsapp, **extras)
+            message.reply(invoke_msg if not event.cancelled else '❌ — A execução deste card foi cancelado pelo filtro.')
+
         case ["!load", "card", card] if message.user.has_permission("commands.cards.invoke"):
             card = Card(card)
             invoke_msg, event = card.call(whatsapp=whatsapp)
-            message.reply(invoke_msg)
+            message.reply(invoke_msg if not event.cancelled else '❌ — A execução deste card foi cancelado pelo filtro.')
 
         case ["!set", "menu", menu] if message.user.has_permission("commands.set.menu"):
             message.user.menu = Menu(menu)
