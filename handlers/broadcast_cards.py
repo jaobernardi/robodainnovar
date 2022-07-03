@@ -20,9 +20,9 @@ def broadcast_cards(event, action, data, card, **extras):
     count = 0
     for recipient in recipients:
         logger.info(f"Broadcasting to {recipient.phonenumber}")
-        if count >= 10:
+        if count >= len(data['messages'])*3:
             count = 0
-            sleep(1)
+            sleep(0.5)
         for msg in data['messages']:
             recipient.send_message(**msg)
             count += 1
