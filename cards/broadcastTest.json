@@ -1,0 +1,17 @@
+{
+    "name": "Transmissão — Teste",
+    "type": 1,
+    "disabled": false,
+    "data": {        
+        "recipients": [
+            {"name": "Adriana", "number": "555499763132"}
+        ],
+        "messages": [
+            {"msg": "Olá 👋\nÉ hoje!!! \nVocê está convidado a participar de nosso dia alegre e cheio de atrações no Bairro Nova Rio Grande!!!\nTraga toda a família e amigos.\nEle inicia as 10 horas e vai até as 17 horas da tarde! \n\n👉 Terá atrações gratuitas para toda a família!\n- Brinquedos infláveis; \n- Pipoca;\n- Distribuição de brindes;\n- Dj;\n- Erva mate e água quente.\nEsperamos vocês! 🤗\n\n\n>>>O evento será realizado no empreendimento na rua Joaquim Gonçalves Ledo, 3024.<<<"},
+            {"msg": "", "file": "assets/rioGrande1.jpeg"}
+        ]
+    },
+    "invoke": {
+        "call": "ℹ️ — O card _’{card.name}’_ foi invocado e executará as suas tarefas."
+    }
+}
