@@ -17,14 +17,6 @@ logger = logging.getLogger(__name__)
 
 @on("whatsapp_new_message")
 def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
-    logger.debug('-- MESSAGE CHECKS --')
-    logger.debug(f'CHECK: {repr(message.user.phonenumber)} in {repr(TEMPORARY_BLOCKS)}? {message.user.phonenumber in TEMPORARY_BLOCKS}')
-    logger.debug(f'CHECK: {repr(message.type)} == "e2e_notification"? {message.type == "e2e_notification"}')
-    logger.debug(f'CHECK: not {repr(message.text)}? {not message.text}')
-    logger.debug(f'SUB CHECK: {repr(message.type)} == "e2e_notification" or not {repr(message.text)}? {message.type == "e2e_notification" or not message.text}')
-    logger.debug(f'FINAL CHECK: {repr(message.user.phonenumber)} in {repr(TEMPORARY_BLOCKS)} and ({repr(message.type)} == "e2e_notification" or not {repr(message.text)})? {message.user.phonenumber in TEMPORARY_BLOCKS and (message.type == "e2e_notification" or not message.text)}')
-    logger.debug('-- END MESSAGE CHECKS --')
-
     if int(message.user.phonenumber) in TEMPORARY_BLOCKS and (message.type == 'e2e_notification' or not message.text):
         TEMPORARY_BLOCKS.remove(message.user.phonenumber)
         return
@@ -113,11 +105,16 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
             importlib.reload(sys.modules[__name__])
             message.reply("✅ Código recarregado", reaction='✅')
 
-        case ["!load", "card", card, "override", parameter] if message.user.has_permission("commands.cards.invoke"):
+        case ["!load", "card", card, "override", *parameters] if message.user.has_permission("commands.cards.invoke"):
             card = Card(card)
             extras = {}
-            if parameter == "recipients":
-                extras["recipient_override"] = message.user
+            for parameter in parameters:
+                parameter: str
+                if parameter == "recipients":
+                    extras["recipient_override"] = message.user
+                if parameter.startswith("recipient_as="):
+                    extras["recipient_override"] = User.from_phonenumber(parameter.removeprefix("recipient_as="), whatsapp=whatsapp)
+            
             invoke_msg, event = card.call(whatsapp=whatsapp, **extras)
             message.reply(invoke_msg if not event.cancelled else '❌ — A execução deste card foi cancelado pelo filtro.')
 
@@ -151,6 +148,8 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
                     message.reply(message.user.menu.messages['wrong'], reaction="🙅‍♀️")
                 return
 
+
+            
             response = message.user.menu.process_option(msg)
             if response == InternalActions.MENUCHANGE:
                 message.reply(message.user.menu.menu_string(), reaction='✅')
