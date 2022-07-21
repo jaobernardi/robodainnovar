@@ -1,0 +1,207 @@
+{
+    "name": "Transmissão — Madero Living Club",
+    "type": 1,
+    "disabled": true,
+    "data": {        
+        "recipients": [
+            {
+                "name": "JOSE ROBERTO MISSEL CORREA",
+                "number": "555496067895"
+            },
+            {
+                "name": "JULIA DIAS DOS SANTOS",
+                "number": "555499514687"
+            },
+            {
+                "name": "LUIS FILIPE CONFORTIN SARTORI",
+                "number": "555491382035"
+            },
+            {
+                "name": "IEDO FUGA JUNIOR",
+                "number": "555491675178"
+            },
+            {
+                "name": "LEANDRO RIGO",
+                "number": "555481219740"
+            },
+            {
+                "name": "LORIANO ANDRE RIGO",
+                "number": "551189304155"
+            },
+            {
+                "name": "EDUARDO DIAS DOS SANTOS",
+                "number": "555499633161"
+            },
+            {
+                "name": "ANTONIO ROSO",
+                "number": "555491181000"
+            },
+            {
+                "name": "LEONARDO SEGATT",
+                "number": "555491097373"
+            },
+            {
+                "name": "FILIPE ORSATO TESSARO",
+                "number": "555499793789"
+            },
+            {
+                "name": "GABRIEL CUCHI",
+                "number": "555491662610"
+            },
+            {
+                "name": "DINARTE FUGA DE OLIVEIRA",
+                "number": "555181771357"
+            },
+            {
+                "name": "CLAUDIO ANDRE SARTOR",
+                "number": "555499882229"
+            },
+            {
+                "name": "ZEFERINO SEBBEN",
+                "number": "555491758553"
+            },
+            {
+                "name": "MARIO AUGUSTO DE SOUZA DIAS LOPES",
+                "number": "555497108080"
+            },
+            {
+                "name": "BSM TEDESCO",
+                "number": "555496958840"
+            },
+            {
+                "name": "JOVIANE MEZZOMO",
+                "number": "555499913545"
+            },
+            {
+                "name": "EDSON RAIHER ZAMBAN",
+                "number": "555491322468"
+            },
+            {
+                "name": "TIAGO CHIOT",
+                "number": "555496460908"
+            },
+            {
+                "name": "PAULO JOSE FUGA",
+                "number": "555491675164"
+            },
+            {
+                "name": "LUIS HENRIQUE DE SOUZA",
+                "number": "555496190709"
+            },
+            {
+                "name": "SILVANE RIGO",
+                "number": "558488361000"
+            },
+            {
+                "name": "LEANDRO BETTO",
+                "number": "555481330208"
+            },
+            {
+                "name": "MATEUS BERTA",
+                "number": "556499872747"
+            },
+            {
+                "name": "VINICIUS BERTA",
+                "number": "555484438053"
+            },
+            {
+                "name": "MARCIO MEZZOMO",
+                "number": "555491856488"
+            },
+            {
+                "name": "VALMIR LUIS MENEGAT",
+                "number": "555499715433"
+            },
+            {
+                "name": "ANTONIO GILMAR BORGES",
+                "number": "555499766539"
+            },
+            {
+                "name": "DELCY PEDRO FERRO",
+                "number": "551196179443"
+            },
+            {
+                "name": "CRISTIANO LORENZINI NOSKOSKI",
+                "number": "555499857645"
+            },
+            {
+                "name": "DINORA MARTINA FIORAVANSO",
+                "number": "555492000288"
+            },
+            {
+                "name": "RICARDO FRACANABBIA",
+                "number": "555491183140"
+            },
+            {
+                "name": "GILBERTO ZILLI",
+                "number": "555499792145"
+            },
+            {
+                "name": "ALINE COMIN PAGNUSSAT",
+                "number": "555499221728"
+            },
+            {
+                "name": "ANDRE RIGO",
+                "number": "555499444130"
+            },
+            {
+                "name": "MARIANA SASSI E MATHEUS DURANTE",
+                "number": "555499357493"
+            },
+            {
+                "name": "LUCAS SCHIRMER MARTINS",
+                "number": "555491035970"
+            },
+            {
+                "name": "JULIO CARLOS SUSIN",
+                "number": "555499270980"
+            },
+            {"name": "Clarissa", "number": "555481180046"},
+            {"name": "Cynthia Moveis", "number": "555499235937"},
+            {"name": "Christofer Rodrigues", "number": "555496093760"},
+            {"name": "Andre Rigo", "number": "555496093760"},
+            {"name": "Bruna", "number": "555199940727"},
+            {"name": "Cristiano", "number": "555499857645"},
+            {"name": "Filipe Tessaro", "number": "555499793789"},
+            {"name": "Gabriel", "number": "555491662610"},
+            {"name": "Ian", "number": "555499267221"},
+            {"name": "Ivanor Triches", "number": "555499863300"},
+            {"name": "Jhonatan", "number": "555496558383"},
+            {"name": "Lucas Martins", "number": "555491035970"},
+            {"name": "Marcio Mezzomo", "number": "555491856188"},
+            {"name": "Silvane", "number": "558488361000"},
+            {"name": "Thi Esposa Marcio", "number": "555491857775"},
+            {"name": "Trices", "number": "555481330208"},
+            {"name": "Zeferino", "number": "555491758553"},
+            {"name": "Acquatec Adri", "number": "555484027720"},
+            {"name": "Dorval Fornecedor Madeiro", "number": "555491181370"},
+            {"name": "Ricardo Allumarau", "number": "555499165202"},
+            {"name": "Janquiel Alumara.", "number": "555491200669"},
+            {"name": "Thales Fernandes Unik", "number": "555484080082"},
+            {"name": "Alexandro Pagnussatt Todeschini", "number": "555491307950"},
+            {"name": "Destaque Orsato", "number": "555499399620"},
+            {"name": "Luciana Betto Marodim", "number": "555481253959"},
+            {"name": "Juliano Soffinox", "number": "555499775289"},
+            {"name": "Fabio Cimpaver", "number": "555481681522"},
+            {"name": "Serginho Delta Marau", "number": "555496240883"},
+            {"name": "Vini Roso", "number": "555491591586"},
+            {"name": "Vini Segatt", "number": "555491710307"},
+            {"name": "Cristhine Roso Daniel", "number": "555491552609"},
+            {"name": "Antonio Roso", "number": "555491181000"},
+            {"name": "Betinho Toson", "number": "555499746747"},
+            {"name": "Beto Toson", "number": "555499746747"},
+            {"name": "Callegaro Sto", "number": "555584413949"},
+            {"name": "Carla Zonta", "number": "555499331830"},
+            {"name": "Lívia Nonnemacher", "number": "555491539090"},
+            {"name": "Henrique Felini", "number": "555496480084"},
+            {"name": "Tais Rizzotto", "number": "555499699050"}
+        ],
+        "messages": [
+            {"msg": "No último fim de semana, a Innovar realizou a entrega do Madero Living Club aos clientes e também apresentou ao mercado imobiliário toda  qualidade e excelência deste, que é o primeiro condomínio fechado de alto padrão de Marau.\n\nAgradecemos a presença de todos que tornaram este momento único e especial!\n\n📸Confira as fotos nos links abaixo📸\nCerimônia de 15/07: https://bit.ly/Madero-15-07\nApresentação de 16/07: https://bit.ly/Madero-16-07"},
+            {"msg": "", "file": "assets/maderoLC.jpeg"}
+        ]
+    },
+    "invoke": {
+        "call": "ℹ️ — O card _’{card.name}’_ foi invocado e executará as suas tarefas."
+    }
+}
