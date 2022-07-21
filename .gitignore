@@ -136,3 +136,5 @@ dmypy.json
 .DS_Store
 .vscode/
 database/users.sql
+tools/preview.json
+tools/output.json
