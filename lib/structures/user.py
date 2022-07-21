@@ -21,8 +21,8 @@ class User():
         return cls(number, f'{number}@c.us', name, **extras) 
 
     @classmethod
-    def from_phonenumber(cls, number):
-        return cls(number, f'{number}@c.us')
+    def from_phonenumber(cls, number, **extras):
+        return cls(number, f'{number}@c.us', **extras)
 
     @property
     def vcard(self):
