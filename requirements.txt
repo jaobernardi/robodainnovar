@@ -3,3 +3,4 @@ pyding>=1.5.1
 qrcode
 google-cloud-language
 colorama
+tendo

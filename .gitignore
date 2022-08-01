@@ -1,3 +1,6 @@
+#Session stuff
+session.lock
+
 #bin stuff
 bin/*
 !bin/js/

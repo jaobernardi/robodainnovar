@@ -9,7 +9,7 @@ setup_logging()
 from lib import config
 from lib.whatsapp import Whatsapp, SessionStatus
 from lib.database import setup_tables
-from lib.utils import load_handlers
+from lib.utils import load_handlers, aquire_lock
 import logging
 from pyding import on
 from qrcode import QRCode
@@ -75,7 +75,10 @@ def session_update(event, whatsapp, old_status, new_status):
 
 
 if __name__ == "__main__":
+    me = aquire_lock()
     load_handlers(LOGGER_BASENAME)
-
-    whats.start(args.skip_safeguards, args.skip_loop)
+    try:
+        whats.start(args.skip_safeguards, args.skip_loop)
+    except KeyboardInterrupt:
+        exit(0)
 

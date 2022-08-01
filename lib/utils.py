@@ -3,10 +3,14 @@ import os
 import sys
 import traceback
 
+from tendo import singleton
+
 logger = logging.getLogger(__name__)
 
 import inspect
 
+def aquire_lock() -> singleton.SingleInstance:
+    return singleton.SingleInstance()
 
 class InitializeArguments:
     """
