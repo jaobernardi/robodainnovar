@@ -2,7 +2,7 @@ import re
 
 def number_parser(number: str):
     clean_number: str = re.sub('\D+', '', number)
-    if clean_number.startswith("55"):
+    if len(clean_number) > 11 and clean_number.startswith("55"):
         clean_number = clean_number.removeprefix("55")
     
     if len(clean_number) == 11:
