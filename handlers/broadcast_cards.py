@@ -2,13 +2,13 @@ import logging
 from time import sleep
 from pyding import on
 
-from lib.structures import CardAction, User
+from lib.structures import CardAction, Card, User
 from lib.whatsapp import Whatsapp
 
 logger = logging.getLogger(__name__)
 
 @on("card_call", action=CardAction.BROADCAST)
-def broadcast_cards(event, action, data, card, **extras):
+def broadcast_cards(event, action, data, card: Card, **extras):
     recipients: list[User]
     whatsapp: Whatsapp = extras['whatsapp']
     if 'recipient_override' in extras:
