@@ -59,13 +59,14 @@ class User():
         if self._menu:
             self._menu.context['user'] = self
 
-    def send_message(self, msg, file=None, contact=None):
+    def send_message(self, msg, file=None, contact=None, contact_from_number=None):
         if not self.whatsapp:
             # TODO: Custom exception
             raise Exception("Missing whatsapp interface object")
 
         options = {}
-
+        if contact_from_number:
+            contact = User.from_phonenumber(contact_from_number)
         if contact:
             options['contactCard'] = contact.id
             options['contactCardName'] = contact.name or contact.phonenumber
