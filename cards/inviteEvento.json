@@ -1,0 +1,26 @@
+{
+    "name": "Apresentação da Casa",
+    "type": 1,
+    "disabled": false,
+    "data": {        
+        "recipients": [
+            {"name": "João Lucas Bernardi", "number": "555492022338"},
+            {"name": "Adriana", "number": "555499763132"}
+        ],
+        "messages": [
+            {"msg": "🎟️ Convite para Apresentação da Casa \n\nOlá! 👋\nVocê foi convidado(a) para participar do nosso evento.\n\n🔎 Informações sobre o evento:\n📍 - Local: Minha casa\n⌚ - Horário: Das 9hrs às 11h"}
+        ]
+    },
+    "effects": [
+        {
+            "type": 1,
+            "data": {
+                "name": "eventInviteConfirmation",
+                "carryOption": "Evento Imaginário 1"
+            }
+        }
+    ],
+    "invoke": {
+        "call": "ℹ️ — O card _’{card.name}’_ foi invocado e executará as suas tarefas."
+    }
+}

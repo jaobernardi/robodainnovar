@@ -1,0 +1,25 @@
+{
+    "options": {
+        "*": {
+            "1": {
+                "result": true,
+                "prompt": "Sim, confirmo a minha presença.",
+                "index_name": "1️⃣"
+            },
+            "2": {
+                "result": false,
+                "prompt": "Não, não irei ao evento.",
+                "index_name": "2️⃣"
+            }
+            
+        }
+    },
+    "prompt": "📌 Para confirmarmos a sua presença, por favor selecione uma das opções:\n",
+    "fallbacks": {
+        "action": "event#menu_invite_status@{carryoption}::{result}|$|exit#.@."
+    },
+    "messages": {
+        "wrong": "📛 — Esta não é uma opção válida. Verifique a lista novamente e envie o *número* correspondente.",
+        "end": "✅ — Certo! Anotei a sua resposta."
+    }
+}

@@ -1,7 +1,7 @@
 
 const done = arguments[arguments.length - 1]
 
-function handle_message(message) {
+function handle_message(message, ignore_checks) {
     if (message.type == 'e2e_notification' || !message.isNewMsg) {
         return
     }

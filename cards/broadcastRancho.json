@@ -1,0 +1,45 @@
+{
+    "name": "Rancho",
+    "type": 1,
+    "disabled": true,
+    "data": {        
+        "recipients": [
+            {"name": "Lourenço Bittencourt e Familia", "number": "555599950404"},
+            {"name": "Felipe Garzão", "number": "555599458882"},
+            {"name": "Valdir Souza Jr", "number": "555599050037"},
+            {"name": "Cinara  Jiane Veeck", "number": "555182901681"},
+            {"name": "Felipe Spat", "number": "555599055051"},
+            {"name": "Eno Veeck", "number": "555591282726"},
+            {"name": "Daniele Spat do Nascimento Arrosi", "number": "555591111292"},
+            {"name": "Ilvio de Morais", "number": "555599799874"},
+            {"name": "Dinar Nascimento", "number": "555599686677"},
+            {"name": "Paulo Buchabqui", "number": "555599612203"},
+            {"name": "Adriano Casagrande", "number": "555599439180"},
+            {"name": "Matheus Karling", "number": "555596332060"},
+            {"name": "Ana Auler", "number": "555584420501"},
+            {"name": "Darci Kaercher Junior", "number": "555599518660"},
+            {"name": "Luana Bieger ", "number": "555584151357"},
+            {"name": "Roberto Sulzbach", "number": "555599886570"},
+            {"name": "Jacques Barbosa", "number": "555599911212"},
+            {"name": "Ivanilso Cassol", "number": "555599742367"},
+            {"name": "Ernesto Pinto Magalhães", "number": "555599758124"},
+            {"name": "Jeroni Obras", "number": "555599627759"},
+            {"name": "Eder Prefeitura", "number": "555599144761"},
+            {"name": "Antonio Deman", "number": "555599226815"},
+            {"name": "Chiquinho Medeiros", "number": "555596000016"},
+            {"name": "Giuliano Azevedo", "number": "555599154774"},
+            {"name": "Rogério Auler", "number": "555599611351"},
+            {"name": "Matheus Becker e Familia", "number": "555596372326"},
+            {"name": "Vanila Obadowski", "number": "555599772161"},
+            {"name": "José Carlos Prefeitura", "number": "555599616684"}
+        ],
+        "messages": [
+            {"msg": "", "file": "assets/rancho.jpeg"},
+            {"msg": "Olá 👋\nVocê está sendo convidado para o nosso Happy Hour!\nConfirme sua presença enviando uma mensagem no WhatsApp: 54 9976-3132 ou wa.me/+555499763132"},
+            {"msg": "", "contact_from_number": "555499763132"}
+        ]
+    },
+    "invoke": {
+        "call": "ℹ️ — O card _’{card.name}’_ foi invocado e executará as suas tarefas."
+    }
+}
