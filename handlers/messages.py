@@ -4,7 +4,7 @@ import sys
 from pyding import on, EventCall, event_space, call
 import logging
 
-from . import atending_call, broadcast_cards
+from . import atending_call, broadcast_cards, card_filter, invites
 from lib.structures import InternalActions, Message, Menu, Card
 from lib.whatsapp import Whatsapp
 from lib.structures.user import User
@@ -97,12 +97,9 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
             message.reply("Disponha! Se tiver qualquer outra solicitação, basta enviar outra mensagem que lhe enviarei o menu de opções 😉")
 
         case ["!reload"] if message.user.has_permission("commands.reload"):
-            event_space.global_event_space.unregister_from_module(atending_call)
-            importlib.reload(atending_call)
-            event_space.global_event_space.unregister_from_module(broadcast_cards)
-            importlib.reload(broadcast_cards)
-            event_space.global_event_space.unregister_from_module(sys.modules[__name__])
-            importlib.reload(sys.modules[__name__])
+            for module in [atending_call, broadcast_cards, card_filter, invites, sys.modules[__name__]]:
+                event_space.global_event_space.unregister_from_module(module)
+                importlib.reload(module)
             message.reply("✅ Código recarregado", reaction='✅')
 
         case ["!load", "card", card, "override", *parameters] if message.user.has_permission("commands.cards.invoke"):
@@ -116,7 +113,8 @@ def new_message(event: EventCall, whatsapp: Whatsapp, message: Message):
                     extras["recipient_override"] = User.from_phonenumber(parameter.removeprefix("recipient_as="), whatsapp=whatsapp)
             
             invoke_msg, event = card.call(whatsapp=whatsapp, **extras)
-            message.reply(invoke_msg if not event.cancelled else '❌ — A execução deste card foi cancelado pelo filtro.')
+            if "invoke_msg" not in parameters:
+                message.reply(invoke_msg if not event.cancelled else '❌ — A execução deste card foi cancelado pelo filtro.')
 
         case ["!load", "card", card] if message.user.has_permission("commands.cards.invoke"):
             card = Card(card)
