@@ -37,6 +37,6 @@ def setup_logger(level, filename):
     logging.basicConfig(
         level=level,
         handlers=[
-            logging.FileHandler(filename),
+            logging.FileHandler(filename, encoding='utf-8'),
         ]
     )

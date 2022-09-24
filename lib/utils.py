@@ -38,14 +38,14 @@ class InitializeArguments:
         # Call the function
         return self.function(**input_args)
 
-def load_handlers(basename):
+def load_handlers():
     for handler in os.listdir("handlers"):
         if handler.endswith(".py"):
             try:
                 __import__("handlers."+handler.removesuffix(".py"))
                 logging.getLogger('handlers.'+handler.removesuffix(".py")).addHandler(
                     logging.FileHandler(
-                        'logs/'+basename+'-handlers.'+handler.removesuffix(".py")+".log"
+                        'logs/'+'handlers.'+handler.removesuffix(".py")+".log"
                     )
                 )
                 logger.info(f'Loaded {handler}')

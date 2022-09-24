@@ -29,7 +29,6 @@ parser.add_argument('--reset_session', action='store_true', help='Resets chromed
 
 
 args = parser.parse_args()
-LOGGER_BASENAME = str(time.time())
 
 logger = logging.getLogger("__main__")
 
@@ -39,9 +38,9 @@ if args.reset_session:
 
 if args.debug:
     logging.getLogger("selenium").setLevel(logging.INFO)
-    setup_logger(logging.DEBUG, f'logs/{LOGGER_BASENAME}-DEBUG.log')
+    setup_logger(logging.DEBUG, f'logs/main-DEBUG.log')
 else:
-    setup_logger(logging.INFO, f'logs/{LOGGER_BASENAME}.log')
+    setup_logger(logging.INFO, f'logs/main.log')
 
 
 if args.debug_module:
@@ -76,7 +75,7 @@ def session_update(event, whatsapp, old_status, new_status):
 
 if __name__ == "__main__":
     me = aquire_lock()
-    load_handlers(LOGGER_BASENAME)
+    load_handlers()
     try:
         whats.start(args.skip_safeguards, args.skip_loop)
     except KeyboardInterrupt:
